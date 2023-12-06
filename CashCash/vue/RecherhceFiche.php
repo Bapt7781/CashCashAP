@@ -15,6 +15,8 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
+            text-align:center;
+            
         }
 
         .container {
@@ -40,7 +42,7 @@
         }
 
         button {
-            background-color:#696969;
+            background-color:#007BFF;
             color: white;
             padding: 10px 174px;
             border: none;
@@ -49,7 +51,7 @@
         }
 
         button:hover {
-            background-color:grey;
+            background-color:#0056b3;
         }
 
         .client-list {
@@ -64,13 +66,17 @@
             border-radius: 4px;
             background-color:#C0C0C0;
         }
+        label{
+            font-weight:bold;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="input-group flex-nowrap">
             <form method="POST" action="">
-                <input type="text" name="numero_client" class="form-control" placeholder="Saisir un numéro client" aria-label="Saisir un numéro client" aria-describedby="addon-wrapping">
+                <label for="numero client" >Saisir un numéro client</label>
+                <input type="number" name="numero_client" class="form-control" placeholder="Ex: 18">
                 <button type="submit">Valider</button>
             </form>
         </div>
