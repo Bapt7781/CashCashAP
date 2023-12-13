@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="../css/vueConsulterInterventionAssistant.css">
+<link rel="stylesheet" href="./css/vueConsulterInterventionAssistant.css">
 <form class="form" action="./?action=RechercherIntervention" method="POST">
     <label for="Date_Intervention">Date intervention :</label>
     <input name="Date_Intervention" id="Date_Intervention" type="date"/>
