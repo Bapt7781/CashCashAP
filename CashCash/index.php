@@ -1,3 +1,14 @@
+<?php 
+include "getRacine.php";
+include_once "$racine/modele/authentification.inc.php"; // pour pouvoir utiliser isLoggedOn()
+
+if (isset($_GET["action"])) {
+    $action = $_GET["action"];
+} 
+else {
+    $action = "defaut";
+}
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -52,7 +63,7 @@
     <form>
         <div class="mb-3 col">
           <label for="exampleFormControlInput1" class="form-label">Matricule</label>
-          <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Ex : 5">
+          <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="Ex : 5">
         </div>
         <div class="mb-3">
           <label for="exampleInputPassword1" class="form-label">Mot de passe</label>
