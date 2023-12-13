@@ -57,7 +57,7 @@ include_once "$racine/modele/authentification.inc.php"; // pour pouvoir utiliser
     <form action="./?action=authentification" method="POST">
         <div class="mb-3 col">
           <label for="exampleFormControlInput1" class="form-label">Matricule</label>
-          <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="Ex : 5" name="MatriculeU">
+          <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="Ex : 5" name="matriculeU">
         </div>
         <div class="mb-3">
           <label for="exampleInputPassword1" class="form-label">Mot de passe</label>
