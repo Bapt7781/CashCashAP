@@ -17,6 +17,7 @@ else
 }
 echo ($matriculeU);
 echo ($mdpU);
+echo (7);
 
 // traitement si necessaire des donnees recuperees
 login($matriculeU,$mdpU);
