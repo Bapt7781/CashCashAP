@@ -8,12 +8,12 @@ function login($matriculeU, $mdpU) {
     }
 
     $util = getUtilisateurByMatriculeU($matriculeU);
-    $mdpBD = $util["MotDePasse"];
+    $mdpBD = $util["MotDePasse"]; // Utilisez le nom correct du champ dans la base de données
 
     if (trim($mdpBD) == trim(crypt($mdpU, $mdpBD))) {
         // le mot de passe est celui de l'utilisateur dans la base de donnees
-        $_SESSION["matricule"] = $matriculeU;
-        $_SESSION["MotDePasse"] = $mdpBD;
+        $_SESSION["matriculeU"] = $matriculeU; // Utilisez la même clé que dans les autres fonctions
+        $_SESSION["mdpU"] = $mdpBD; // Utilisez la même clé que dans les autres fonctions
     }
 
     $role = getRole($matriculeU);
@@ -24,6 +24,7 @@ function login($matriculeU, $mdpU) {
         $_SESSION["role"] = 'assistant';
     }
 }
+
 
 function logout() {
     if (!isset($_SESSION)) {
