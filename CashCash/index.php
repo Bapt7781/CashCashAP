@@ -60,7 +60,7 @@ else {
     </style>
 </head>
 <body>
-    <form>
+    <form action="./?action=authentification" method="POST">
         <div class="mb-3 col">
           <label for="exampleFormControlInput1" class="form-label">Matricule</label>
           <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="Ex : 5">
