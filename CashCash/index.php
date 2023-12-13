@@ -1,6 +1,17 @@
 <?php 
 include "getRacine.php";
 include_once "$racine/modele/authentification.inc.php"; // pour pouvoir utiliser isLoggedOn()
+require_once("modele/utilisateur.inc.php");
+require_once("modele/authentification.inc.php");
+
+// Vérifier le formulaire lorsqu'il est soumis
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $matricule = $_POST['matricule'];
+    $motDePasse = $_POST['motDePasse'];
+
+    // Appeler la fonction de connexion depuis authentification.inc.php
+    login($matricule, $motDePasse);
+}
 
 if (isset($_GET["action"])) {
     $action = $_GET["action"];
