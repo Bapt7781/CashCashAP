@@ -1,49 +1,5 @@
-<style>
-    .form {
-        max-width: 400px;
-        margin: 0 auto;
-        padding: 20px;
-        border: 1px solid #ccc;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        margin-top: 5%;
-        font-family: Arial, sans-serif;
-    }
-
-    label {
-        display: block;
-        margin-bottom: 8px;
-        font-weight: bold;
-    }
-
-    input {
-        width: 100%;
-        padding: 8px;
-        margin-bottom: 16px;
-        box-sizing: border-box;
-    }
-
-    h3 {
-        text-align: center;
-        margin: 20px 0;
-    }
-
-    button {
-        background-color: #007BFF;
-        color: white;
-        padding: 10px 15px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        font-size: 16px;
-    }
-
-    button:hover {
-        background-color: #0056b3;
-    }
-</style>
-
-<form class="form" action="../modele/bd.Intervention" method="post">
+<link rel="stylesheet" href="../css/vueConsulterInterventionAssistant.css">
+<form class="form" action="./?action=RechercherIntervention" method="POST">
     <label for="Date_Intervention">Date intervention :</label>
     <input name="Date_Intervention" id="Date_Intervention" type="date"/>
 
