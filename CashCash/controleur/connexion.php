@@ -15,16 +15,12 @@ else
     $matriculeU="";
     $mdpU="";
 }
-echo ($matriculeU);
-echo ($mdpU);
-echo (7);
-
+echo($mdpU);
 // traitement si necessaire des donnees recuperees
 login($matriculeU,$mdpU);
 
 if (isLoggedOn()){ // si l'utilisateur est connecté on redirige vers la vue accueil
     include "$racine/vue/Accueil.php";
-echo "7";
 }
 //else{ // l'utilisateur n'est pas connecté, on affiche le formulaire de connexion
     // appel du script de vue 

@@ -12,3 +12,21 @@
 
     <button type="submit">Rechercher</button>
 </form>
+<?php
+// Vérifiez d'abord si le tableau n'est pas vide
+if (!empty($intervention)) {
+    echo "<h2>Liste des interventions:</h2>";
+    echo "<ul>";
+
+    // Utilisez une boucle foreach pour parcourir le tableau
+    foreach ($intervention as $ligne) {
+        echo "<li>Numéro de l'intervention: " . $ligne['NuméroIntervention'] . "</li>";
+        // Ajoutez d'autres éléments du tableau que vous souhaitez afficher
+    }
+
+    echo "</ul>";
+} else {
+    echo "Aucune intervention trouvée pour la date spécifiée.";
+}
+
+?>

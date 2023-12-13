@@ -10,6 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (isset($_POST["Date_Intervention"]) && !empty($_POST["Date_Intervention"])) {  //Cas ou il y a que la date
         // Récupère les données du formulaire pour la recherche par date
         $dateIntervention = $_POST["Date_Intervention"];
+        $intervention = getInterventionByDate($dateIntervention);
     } elseif (isset($_POST["Numero_Technicien"]) && !empty($_POST["Numero_Technicien"])) { //Cas ou il y a que le Matricule
         // Récupère les données du formulaire pour la recherche par technicien
         $numeroTechnicien = $_POST["Numero_Technicien"];
