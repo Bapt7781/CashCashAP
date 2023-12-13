@@ -8,7 +8,11 @@ function login($matriculeU, $mdpU) {
     }
 
     $util = getUtilisateurByMatriculeU($matriculeU);
-    $mdpBD = $util["MotDePasse"]; // Utilisez le nom correct du champ dans la base de données
+    if ($util !== false) {
+        $mdpBD = $util["MotDePasse"];
+    } else {
+        return null;
+    }
 
     if (trim($mdpBD) == trim(crypt($mdpU, $mdpBD))) {
         // le mot de passe est celui de l'utilisateur dans la base de donnees
@@ -52,7 +56,7 @@ function isLoggedOn() {
     $ret = false;
 
     if (isset($_SESSION["matriculeU"])) {
-        $util = getUtilisateurByMailU($_SESSION["matriculeU"]);
+        $util = getUtilisateurByMatriculeU($_SESSION["matriculeU"]);
         if ($util["matriculeU"] == $_SESSION["matriculeU"] && $util["mdpU"] == $_SESSION["mdpU"]
         ) {
             $ret = true;
