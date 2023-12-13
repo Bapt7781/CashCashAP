@@ -26,7 +26,7 @@ function getRole($matriculeU){
 
         $cnx = connexionPDO();
 
-        $reqEmpl = $cnx->prepare("select Matricule from employe");
+        $reqEmpl = $cnx->prepare("SELECT Matricule from employe");
         $reqEmpl->execute();
         $matriculesEmpl = $reqEmpl->fetchAll(PDO::FETCH_COLUMN);
 
