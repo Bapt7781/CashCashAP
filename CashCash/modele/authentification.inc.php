@@ -7,6 +7,18 @@ function login($matriculeU, $mdpU) {
         session_start();
     }
 
+    $util = getUtilisateurByMatriculeU($matriculeU);
+    if ($util !== false) {
+        $mdpBD = $util["MotDePasse"];
+    } else {
+        return null;
+    }
+
+    if (trim($mdpBD) == trim(crypt($mdpU, $mdpBD))) {
+        // le mot de passe est celui de l'utilisateur dans la base de donnees
+        $_SESSION["matriculeU"] = $matriculeU; // Utilisez la même clé que dans les autres fonctions
+        $_SESSION["mdpU"] = $mdpBD; // Utilisez la même clé que dans les autres fonctions
+    }
 
     $role = getRole($matriculeU);
 
@@ -16,6 +28,7 @@ function login($matriculeU, $mdpU) {
         $_SESSION["role"] = 'assistant';
     }
 }
+
 
 function logout() {
     if (!isset($_SESSION)) {
@@ -43,7 +56,7 @@ function isLoggedOn() {
     $ret = false;
 
     if (isset($_SESSION["matriculeU"])) {
-        $util = getUtilisateurByMailU($_SESSION["matriculeU"]);
+        $util = getUtilisateurByMatriculeU($_SESSION["matriculeU"]);
         if ($util["matriculeU"] == $_SESSION["matriculeU"] && $util["mdpU"] == $_SESSION["mdpU"]
         ) {
             $ret = true;
