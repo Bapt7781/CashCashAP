@@ -21,6 +21,24 @@ function getUtilisateurs() {
     return $resultat;
 }
 
+function getRole(){
+    try {
+        $cnx = connexionPDO();
+        $reqEmpl = $cnx->prepare("select * from employe");
+        $reqEmpl->execute();
+
+        $ligne = $reqEmpl->fetch(PDO::FETCH_ASSOC);
+        while ($ligne) {
+            $resultat[] = $ligne;
+            $ligne = $req->fetch(PDO::FETCH_ASSOC);
+        }
+    } catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+    return $resultat;
+}
+
 function getUtilisateurByMatriculeU($matriculeU) {
 
     try {
