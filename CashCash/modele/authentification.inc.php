@@ -7,6 +7,9 @@ function login($matriculeU, $mdpU) {
         session_start();
     }
 
+    $util = getUtilisateurByMatriculeU($matriculeU);
+    $mdpBD = $util["mdpU"];
+
     if (trim($mdpBD) == trim(crypt($mdpU, $mdpBD))) {
         // le mot de passe est celui de l'utilisateur dans la base de donnees
         $_SESSION["matriculeU"] = $matriculeU;
