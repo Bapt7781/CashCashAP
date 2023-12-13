@@ -23,28 +23,28 @@ function getEmploye() {
 
 function getRole($matriculeU){
     try {
-
         $cnx = connexionPDO();
 
-        $reqEmpl = $cnx->prepare("select Matricule from employe");
+        $reqEmpl = $cnx->prepare("SELECT Matricule FROM employe");
         $reqEmpl->execute();
         $matriculesEmpl = $reqEmpl->fetchAll(PDO::FETCH_COLUMN);
-
+        
         $reqTech = $cnx->prepare("SELECT Matricule FROM technicien WHERE Matricule = :matricule");
+        $reqTech->bindParam(':matricule', $matriculeU, PDO::PARAM_INT); // Utilisez PDO::PARAM_INT ici
         $reqTech->execute();
-        $reqTech->bindParam(':matricule', $matriculeU);
         $estTechnicien = ($reqTech->rowCount() > 0);
-
+        
         $reqAssist = $cnx->prepare("SELECT Matricule FROM assistant_téléphonique WHERE Matricule = :matricule");
-        $reqAssist->bindParam(':matricule', $matriculeU);   
+        $reqAssist->bindParam(':matricule', $matriculeU, PDO::PARAM_INT); // Utilisez PDO::PARAM_INT ici
         $reqAssist->execute();
         $estAssistant = ($reqAssist->rowCount() > 0);
-
+        
         if ($estTechnicien) {
             return 'technicien';
         } elseif ($estAssistant) {
             return 'assistant';
         }
+        
 
     } catch (PDOException $e) {
         print "Erreur !5: " . $e->getMessage();
