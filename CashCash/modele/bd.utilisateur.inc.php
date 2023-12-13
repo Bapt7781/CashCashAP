@@ -32,11 +32,11 @@ function getRole($matriculeU){
 
         $reqTech = $cnx->prepare("SELECT Matricule FROM technicien WHERE Matricule = :matricule");
         $reqTech->execute();
-        $reqTech->bindParam(':matricule', $matriculeU);
+        $reqTech->bindParam(':matricule', $matriculeU, PDO::PARAM_STR);
         $estTechnicien = ($reqTech->rowCount() > 0);
 
         $reqAssist = $cnx->prepare("SELECT Matricule FROM assistant_téléphonique WHERE Matricule = :matricule");
-        $reqAssist->bindParam(':matricule', $matriculeU);   
+        $reqAssist->bindParam(':matricule', $matriculeU,PDO::PARAM_STR);   
         $reqAssist->execute();
         $estAssistant = ($reqAssist->rowCount() > 0);
 
