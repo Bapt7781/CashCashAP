@@ -8,14 +8,14 @@ function login($matriculeU, $mdpU) {
     }
 
     $util = getUtilisateurByMatriculeU($matriculeU);
-    $mdpBD = $util["mdpU"];
+    $mdpBD = $util["MotDePasse"];
 
     if (trim($mdpBD) == trim(crypt($mdpU, $mdpBD))) {
         // le mot de passe est celui de l'utilisateur dans la base de donnees
-        $_SESSION["matriculeU"] = $matriculeU;
-        $_SESSION["mdpU"] = $mdpBD;
+        $_SESSION["matricule"] = $matriculeU;
+        $_SESSION["MotDePasse"] = $mdpBD;
     }
-    
+
     $role = getRole($matriculeU);
 
     if ($role == 'technicien') {
