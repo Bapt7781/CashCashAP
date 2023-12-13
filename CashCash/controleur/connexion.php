@@ -8,7 +8,10 @@ include_once "$racine/modele/authentification.inc.php";
 if (isset($_POST["matriculeU"]) && isset($_POST["mdpU"])){
     $matriculeU=$_POST["matriculeU"];
     $mdpU=$_POST["mdpU"];
+    
 }
+echo ($matriculeU);
+echo ($mdpU);
 else
 {
     $matriculeU="";
