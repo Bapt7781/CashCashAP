@@ -58,7 +58,7 @@ function getUtilisateurByMatriculeU($matriculeU) {
     try {
         $cnx = connexionPDO();
         $req = $cnx->prepare("select * from employe where matricule=:matriculeU");
-        $req->bindValue(':matriculeU', $matriculeU, PDO::PARAM_STR);
+        $req->bindValue(':matriculeU', $matriculeU, PDO::PARAM_INT);
         $req->execute();
         
         $resultat = $req->fetch(PDO::FETCH_ASSOC);
