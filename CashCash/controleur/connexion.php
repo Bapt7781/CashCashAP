@@ -10,13 +10,13 @@ if (isset($_POST["matriculeU"]) && isset($_POST["mdpU"])){
     $mdpU=$_POST["mdpU"];
     
 }
-echo ($matriculeU);
-echo ($mdpU);
 else
 {
     $matriculeU="";
     $mdpU="";
 }
+echo ($matriculeU);
+echo ($mdpU);
 
 // traitement si necessaire des donnees recuperees
 login($matriculeU,$mdpU);
