@@ -1,8 +1,6 @@
 <?php 
 include "getRacine.php";
 include_once "$racine/modele/authentification.inc.php"; // pour pouvoir utiliser isLoggedOn()
-require_once("modele/utilisateur.inc.php");
-require_once("modele/authentification.inc.php");
 
 ?>
 <!DOCTYPE html>

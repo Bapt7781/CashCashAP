@@ -33,7 +33,7 @@ function logout() {
     unset($_SESSION["mdpU"]);
 }
 
-function getMailULoggedOn(){
+function getMatriculeULoggedOn(){
     if (isLoggedOn()){
         $ret = $_SESSION["matriculeU"];
     }
