@@ -23,7 +23,7 @@ function getEmploye() {
 
 function getRole($matriculeU){
     try {
-        echo ("1");
+
         $cnx = connexionPDO();
 
         $reqEmpl = $cnx->prepare("select Matricule from employe");
@@ -47,7 +47,7 @@ function getRole($matriculeU){
         }
 
     } catch (PDOException $e) {
-        print "Erreur !: " . $e->getMessage();
+        print "Erreur !5: " . $e->getMessage();
         die();
     }
 
