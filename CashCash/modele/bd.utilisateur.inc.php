@@ -23,6 +23,7 @@ function getEmploye() {
 
 function getRole($matriculeU){
     try {
+        echo ("1");
         $cnx = connexionPDO();
 
         $reqEmpl = $cnx->prepare("select Matricule from employe");
