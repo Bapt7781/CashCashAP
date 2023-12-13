@@ -15,6 +15,14 @@ function login($matriculeU, $mdpU) {
         $_SESSION["matriculeU"] = $matriculeU;
         $_SESSION["mdpU"] = $mdpBD;
     }
+
+    $role = getRole($matriculeU);
+
+    if ($role == 'technicien') {
+        $_SESSION["role"] = 'technicien';
+    } elseif ($role == 'assistant') {
+        $_SESSION["role"] = 'assistant';
+    }
 }
 
 function logout() {
