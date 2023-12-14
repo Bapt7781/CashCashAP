@@ -28,5 +28,4 @@ if (!empty($intervention)) {
 } else {
     echo "Aucune intervention trouvée pour la date spécifiée.";
 }
-
 ?>
