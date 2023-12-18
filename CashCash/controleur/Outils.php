@@ -15,5 +15,4 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
     echo"7";
 }
-include "$racine/vue/OutilsStatistiques.php";
 ?>
