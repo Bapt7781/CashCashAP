@@ -18,7 +18,6 @@ function login($matriculeU, $mdpU) {
     if (trim($mdpBD) == trim($mdpU)) {
         $_SESSION["matriculeU"] = $matriculeU;
         $_SESSION["mdpU"] = $mdpBD;
-        echo "5";
     }
         // Récupération du rôle
         $role = getRole($matriculeU);
