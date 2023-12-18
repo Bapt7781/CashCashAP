@@ -7,26 +7,32 @@ function login($matriculeU, $mdpU) {
         session_start();
     }
 
-    $util = getUtilisateurByMatriculeU($matriculeU);
-    if ($util !== false) {
-        $mdpBD = $util["MotDePasse"];
-    } else {
-        return null;
+    $utilisateur = getUtilisateurByMatriculeU($matriculeU);
+    if ($utilisateur === false) {
+        return null; // L'utilisateur n'existe pas
     }
 
-    if (trim($mdpBD) == trim(crypt($mdpU, $mdpBD))) {
-        // le mot de passe est celui de l'utilisateur dans la base de donnees
-        $_SESSION["matriculeU"] = $matriculeU; // Utilisez la même clé que dans les autres fonctions
-        $_SESSION["mdpU"] = $mdpBD; // Utilisez la même clé que dans les autres fonctions
-    }
+    $mdpBD = $utilisateur["MotDePasse"];
 
-    $role = getRole($matriculeU);
+    // Vérification du mot de passe
+    if (verifyPassword($mdpU, $mdpBD)) {
+        $_SESSION["matriculeU"] = $matriculeU;
+        $_SESSION["mdpU"] = $mdpBD;
+        
+        // Récupération du rôle
+        $role = getRole($matriculeU);
 
-    if ($role == 'technicien') {
-        $_SESSION["role"] = 'technicien';
-    } elseif ($role == 'assistant') {
-        $_SESSION["role"] = 'assistant';
+        // Stockage du rôle dans la session
+        if ($role == 'technicien' || $role == 'assistant') {
+            $_SESSION["role"] = $role;
+        }
     }
+    
+}
+
+// Fonction pour vérifier le mot de passe
+function verifyPassword($inputPassword, $storedPassword) {
+    return password_verify(trim($inputPassword), trim($storedPassword));
 }
 
 
@@ -57,12 +63,12 @@ function isLoggedOn() {
 
     if (isset($_SESSION["matriculeU"])) {
         $util = getUtilisateurByMatriculeU($_SESSION["matriculeU"]);
-        if ($util["matriculeU"] == $_SESSION["matriculeU"] && $util["mdpU"] == $_SESSION["mdpU"]
-        ) {
+        if ($util["Matricule"] == $_SESSION["matriculeU"] && $util["MotDePasse"] == $_SESSION["mdpU"]) {
             $ret = true;
         }
     }
     return $ret;
+
 }
 
 if ($_SERVER["SCRIPT_FILENAME"] == __FILE__) {

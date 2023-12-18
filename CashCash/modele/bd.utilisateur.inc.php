@@ -41,13 +41,15 @@ function getRole($matriculeU){
         
         if ($estTechnicien) {
             return 'technicien';
+
         } elseif ($estAssistant) {
             return 'assistant';
+
         }
         
 
     } catch (PDOException $e) {
-        print "Erreur !5: " . $e->getMessage();
+        print "Erreur !: " . $e->getMessage();
         die();
     }
 
