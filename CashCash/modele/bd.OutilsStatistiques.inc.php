@@ -1,7 +1,6 @@
 <?php
 include_once "bd.inc.php";
-
-function getStatistiques(){
+function getStatistiques($dateDebut, $dateFin){
     try{
         $cnx = connexionPDO();
         $req = $cnx->prepare("SELECT e.NomEmploye, e.PrenomEmploye, 
@@ -13,9 +12,10 @@ function getStatistiques(){
                                 JOIN employe e ON t.Matricule = e.Matricule 
                                 JOIN client cl ON i.NumeroClient = cl.NumeroClient 
                                 JOIN controler c ON i.NuméroIntervention = c.NuméroIntervention
-                                WHERE i.DateVisite BETWEEN '' AND '2023-01-31'
+                                WHERE i.DateVisite BETWEEN :dateDebut AND :dateFin
                                 GROUP BY e.Matricule;");
-
+        $req->bindValue(":dateDebut", $dateDebut, PDO::PARAM_STR);
+        $req->bindValue(":dateFin", $dateFin, PDO::PARAM_STR);
         $req->execute();
         $resultats = $req->fetchAll(PDO::FETCH_ASSOC);
 

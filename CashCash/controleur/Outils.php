@@ -12,8 +12,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         $dateDebut = "$annee/01/$mois";
         $dateFin = "$annee/31/$mois";
-        $resultatHTML = "<p>Résultats pour le mois $mois de l'année $annee</p>";
-        echo $resultatHTML;
+
+        $Statistiques = getStatistiques($dateDebut, $dateFin);
+
     }
 }
+include "$racine/vue/OutilsStatistiques.php";
 ?>

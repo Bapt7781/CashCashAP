@@ -93,7 +93,22 @@ include "getRacine.php";
 
     <div id="resultat"></div>
     </form>
+<?php
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (!empty($Statistiques)) {
+        foreach ($Statistiques as $uneLigne) {
+          echo"nom prenom employe :". $uneLigne["NomEmplye, PrenomEmployer"];
+          echo"Nombre d'intervention réaliser :". $uneLigne[""];
+          echo"Nombre total de kilomètres parcouru :". $uneLigne["DistanceKm"];
+          echo"Durée passé au controle du matériel :". $uneLigne["TempsPasse"];
+          echo"". $uneLigne[""];
+        }
 
+    } else {
+
+    }
+}
+?>
   </div>
 </body>
 </html>
