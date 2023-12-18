@@ -15,10 +15,11 @@ function login($matriculeU, $mdpU) {
     $mdpBD = $utilisateur["MotDePasse"];
 
     // Vérification du mot de passe
-    if (verifyPassword($mdpU, $mdpBD)) {
+    if (trim($mdpBD) == trim($mdpU)) {
         $_SESSION["matriculeU"] = $matriculeU;
         $_SESSION["mdpU"] = $mdpBD;
-        
+        echo "5";
+    }
         // Récupération du rôle
         $role = getRole($matriculeU);
 
@@ -26,14 +27,8 @@ function login($matriculeU, $mdpU) {
         if ($role == 'technicien' || $role == 'assistant') {
             $_SESSION["role"] = $role;
         }
-    }
-    
 }
 
-// Fonction pour vérifier le mot de passe
-function verifyPassword($inputPassword, $storedPassword) {
-    return password_verify(trim($inputPassword), trim($storedPassword));
-}
 
 
 function logout() {
@@ -69,5 +64,22 @@ function isLoggedOn() {
     }
     return $ret;
 
+}
+
+if ($_SERVER["SCRIPT_FILENAME"] == __FILE__) {
+    // prog principal de test
+    header('Content-Type:text/plain');
+
+
+    // test de connexion
+    login("test@bts.sio", "sio");
+    if (isLoggedOn()) {
+        echo "logged";
+    } else {
+        echo "not logged";
+    }
+
+    // deconnexion
+    logout();
 }
 ?>

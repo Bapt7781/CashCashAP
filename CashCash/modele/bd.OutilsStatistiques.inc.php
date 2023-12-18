@@ -16,6 +16,12 @@ function getStatistiques(){
                                 GROUP BY e.Matricule;");
 
         $req->execute();
+        $resultats = $req->fetchAll(PDO::FETCH_ASSOC);
+
+        return $resultats;
+    }catch(Exception $e){
+        print "Erreur !:" .$e->getMessage();
+        die();
     }
 }
 ?>

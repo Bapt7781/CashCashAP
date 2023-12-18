@@ -66,6 +66,7 @@
   <div class="calendrier">
     <h1>Sélection du Mois et de l'Année</h1>
 
+    <form action="modele\bd.OutilsStatistiques.inc.php" method="post">
     <label for="mois">Mois :</label>
     <select id="mois">
       <option value="1">Janvier</option>

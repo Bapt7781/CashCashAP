@@ -3,9 +3,15 @@ if ($_SERVER["SCRIPT_FILENAME"] == __FILE__) {
     $racine = "..";
 }
 include_once "$racine/modele/bd.OutilsStatistiques.inc.php";
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    if (isset($_POST["NomEmploye"])){
-        $employe = $_POST["NomEmploye"];
+    if (isset($_POST["mois"]) && isset($_POST["annee"])){
+        $mois = $_POST["mois"];
+        $annee = $_POST["annee"];
+
+        $resultatHTML = "<p>Résultats pour le mois $mois de l'année $annee</p>";
+
+        echo $resultatHTML;
     }
 }
 ?>
