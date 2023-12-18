@@ -1,6 +1,4 @@
-<?php
-include "getRacine.php";
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -71,36 +69,29 @@ include "getRacine.php";
 
     <form class="form" action="./?action=Statistiques" method="POST">
     <label for="mois">Mois :</label>
-    <select id="mois">
-      <option value="1">Janvier</option>
-      <option value="2">Février</option>
-      <option value="3">Mars</option>
-      <option value="4">Avril</option>
-      <option value="5">Mai</option>
-      <option value="6">Juin</option>
-      <option value="7">Juillet</option>
-      <option value="8">Août</option>
-      <option value="9">Septembre</option>
-      <option value="10">Octobre</option>
-      <option value="11">Novembre</option>
-      <option value="12">Décembre</option>
+    <select name="mois">
+        <option value="1">Janvier</option>
+        <option value="2">Février</option>
+        <option value="3">Mars</option>
+        <option value="4">Avril</option>
+        <option value="5">Mai</option>
+        <option value="6">Juin</option>
+        <option value="7">Juillet</option>
+        <option value="8">Août</option>
+        <option value="9">Septembre</option>
+        <option value="10">Octobre</option>
+        <option value="11">Novembre</option>
+        <option value="12">Décembre</option>
     </select>
 
     <label for="annee">Année :</label>
-    <input type="number" id="annee" min="1900" max="2100">
+    <input type="number" name="annee" min="1900" max="2100">
 
-    <button onclick="afficherResultat()">Afficher les Interventions</button>
+    <button type="submit">Afficher les Interventions</button>
 
     <div id="resultat"></div>
     </form>
-  </div>
 
-  <script>
-    function afficherResultat() {
-      const mois = document.getElementById('mois').value;
-      const annee = document.getElementById('annee').value;
-      document.getElementById('resultat').innerHTML = resultatHTML;
-    }
-  </script>
+  </div>
 </body>
 </html>
