@@ -1,6 +1,3 @@
-<?php
-include "getRacine.php";
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
