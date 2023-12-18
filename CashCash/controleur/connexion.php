@@ -16,6 +16,7 @@ else
     $mdpU="";
 }
 
+
 // traitement si necessaire des donnees recuperees
 login($matriculeU,$mdpU);
 
