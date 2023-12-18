@@ -12,7 +12,8 @@ function getStatistiques(){
                                 JOIN technicien t ON i.Matricule = t.Matricule 
                                 JOIN employe e ON t.Matricule = e.Matricule 
                                 JOIN client cl ON i.NumeroClient = cl.NumeroClient 
-                                JOIN controler c ON i.NuméroIntervention = c.NuméroIntervention 
+                                JOIN controler c ON i.NuméroIntervention = c.NuméroIntervention
+                                WHERE i.DateVisite BETWEEN '' AND '2023-01-31'
                                 GROUP BY e.Matricule;");
 
         $req->execute();
