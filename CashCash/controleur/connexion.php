@@ -21,7 +21,6 @@ echo $mdpU;
 
 // traitement si necessaire des donnees recuperees
 login($matriculeU,$mdpU);
-var_dump(login($matriculeU,$mdpU));
 
 if (isLoggedOn()){ // si l'utilisateur est connecté on redirige vers la vue accueil
     include "$racine/vue/Accueil.php";
