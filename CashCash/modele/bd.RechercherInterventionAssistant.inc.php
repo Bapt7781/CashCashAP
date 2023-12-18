@@ -57,4 +57,24 @@ function getInterventionByDateMatricule($dateIntervention,$numeroTechnicien){
         die();
     }
 }
-?>
+
+function getInformationIntervention($idIntervention){
+    $resultat = array();
+
+    try {
+        $cnx = connexionPDO();
+        $req = $cnx->prepare("SELECT * FROM intervention, controler WHERE intervention.NumeroIntervention = controler.NumeroIntervention AND intervention.NumeroIntervention = :IdInter;");
+        $req->bindValue(':IdInter', $idIntervention, PDO::PARAM_INT);
+        $req->execute();
+
+        while ($ligne = $req->fetch(PDO::FETCH_ASSOC)) {
+            $resultat[] = $ligne;
+        }
+
+        return $resultat;
+
+    } catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+}

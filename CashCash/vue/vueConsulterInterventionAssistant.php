@@ -1,3 +1,4 @@
+
 <link rel="stylesheet" href="./css/RechercheInt.css">
 <form class="form" action="./?action=RechercherIntervention" method="POST">
     <label for="Date_Intervention">Date intervention :</label>
@@ -10,10 +11,9 @@
 
     <br>
 
-    <button type="submit">Rechercher</button>
+    <button id="FORM" type="submit">Rechercher</button>
 </form>
 <?php
-// Vérifiez si le formulaire a été soumis
 // Vérifiez si le formulaire a été soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (!empty($intervention)) {
@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "Numéro de l'intervention: " . $ligne['NumeroIntervention'];
 
             // Bouton de modification
-            echo "<form action='modifier_intervention.php' method='post'>";
+            echo "<form action='./?action=RechercherIntervention' method='post'>";
             echo "<input type='hidden' name='numero_intervention' value='" . $ligne['NumeroIntervention'] . "'>";
             echo "<button type='submit'>Modifier</button>";
             echo "</form>";
