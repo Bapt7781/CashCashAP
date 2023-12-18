@@ -45,8 +45,8 @@ function getInterventionByDateMatricule($dateIntervention,$numeroTechnicien){
     try{
         $cnx = connexionPDO();
         $req = $cnx->prepare("SELECT NumeroIntervention FROM intervention WHERE Matricule = :NumTech AND DateVisite = :DateI;");
-        $req->bindValue(':NumTech', $MatriculeTech, PDO::PARAM_INT);
-        $req->bindValue(':DateI', $DateI, PDO::PARAM_STR);
+        $req->bindValue(':NumTech', $numeroTechnicien, PDO::PARAM_INT);
+        $req->bindValue(':DateI', $dateIntervention, PDO::PARAM_STR);
 
         $req->execute();
         while ($ligne = $req->fetch(PDO::FETCH_ASSOC)) {

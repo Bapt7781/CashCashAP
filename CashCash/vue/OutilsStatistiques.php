@@ -1,3 +1,6 @@
+<?php
+include "getRacine.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -66,7 +69,7 @@
   <div class="calendrier">
     <h1>Sélection du Mois et de l'Année</h1>
 
-    <form action="modele\bd.OutilsStatistiques.inc.php" method="post">
+    <form class="form" action="./?action=Statistiques" method="POST">
     <label for="mois">Mois :</label>
     <select id="mois">
       <option value="1">Janvier</option>
@@ -89,6 +92,7 @@
     <button onclick="afficherResultat()">Afficher les Interventions</button>
 
     <div id="resultat"></div>
+    </form>
   </div>
 
   <script>

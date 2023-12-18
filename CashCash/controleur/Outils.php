@@ -3,6 +3,7 @@ if ($_SERVER["SCRIPT_FILENAME"] == __FILE__) {
     $racine = "..";
 }
 include_once "$racine/modele/bd.OutilsStatistiques.inc.php";
+include_once "$racine/modele/authentification.inc.php";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (isset($_POST["mois"]) && isset($_POST["annee"])){
@@ -14,4 +15,5 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         echo $resultatHTML;
     }
 }
+include "$racine/vue/OutilsStatistiques.php";
 ?>
