@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="./css/vueConsulterInterventionAssistant.css">
+<link rel="stylesheet" href="./css/RechercheInt.css">
 <form class="form" action="./?action=RechercherIntervention" method="POST">
     <label for="Date_Intervention">Date intervention :</label>
     <input name="Date_Intervention" id="Date_Intervention" type="date"/>
@@ -14,16 +14,23 @@
 </form>
 <?php
 // Vérifiez si le formulaire a été soumis
+// Vérifiez si le formulaire a été soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Vérifiez d'abord si le tableau n'est pas vide
     if (!empty($intervention)) {
         echo "<h2>Liste des interventions:</h2>";
-        echo "<ul>";
+        echo "<ul class='intervention-item'>";
 
-        // Utilisez une boucle foreach pour parcourir le tableau
         foreach ($intervention as $ligne) {
-            echo "<li>Numéro de l'intervention: " . $ligne['NumeroIntervention'] . "</li>";
-            // Ajoutez d'autres éléments du tableau que vous souhaitez afficher
+            echo "<li>";
+            echo "Numéro de l'intervention: " . $ligne['NumeroIntervention'];
+
+            // Bouton de modification
+            echo "<form action='modifier_intervention.php' method='post'>";
+            echo "<input type='hidden' name='numero_intervention' value='" . $ligne['NumeroIntervention'] . "'>";
+            echo "<button type='submit'>Modifier</button>";
+            echo "</form>";
+
+            echo "</li>";
         }
 
         echo "</ul>";
