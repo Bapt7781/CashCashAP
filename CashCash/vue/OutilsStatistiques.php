@@ -1,5 +1,5 @@
 <?php
-include "getRacine.php";
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -55,13 +55,42 @@ include "getRacine.php";
     button:hover {
       background-color: #2980b9;
     }
+    #resultat-container {
+  margin-top: 20px;
+  }
 
-    #resultat {
-      margin-top: 20px;
-      padding: 15px;
-      background-color: #ecf0f1;
-      border-radius: 4px;
-    }
+  .resultat-item {
+    background-color: #fff;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  }
+
+  .resultat-item p {
+    margin: 0;
+  }
+  .resultat-item table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+  }
+
+  .resultat-item th, .resultat-item td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+
+  .resultat-item th {
+    background-color: #D3D3D3;;
+    color: black;
+  }
+
+  .resultat-item tr:nth-child(even) {
+    background-color: #F8F8FF;
+  }
+
   </style>
   <title>Sélection du Mois et de l'Année</title>
 </head>
@@ -93,22 +122,36 @@ include "getRacine.php";
 
     <div id="resultat"></div>
     </form>
-<?php
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  </div>
+  <?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $mois = $_POST['mois'];
+    $annee = $_POST['annee'];
+    $dateDebut = $annee . '-' . str_pad($mois, 2, '0', STR_PAD_LEFT) . '-01';
+    $dateFin = date('Y-m-t', strtotime($dateDebut));
+
+    $Statistiques = getStatistiques($dateDebut, $dateFin);
+
+
     if (!empty($Statistiques)) {
         foreach ($Statistiques as $uneLigne) {
-          echo"nom prenom employe :". $uneLigne["NomEmplye, PrenomEmployer"];
-          echo"Nombre d'intervention réaliser :". $uneLigne[""];
-          echo"Nombre total de kilomètres parcouru :". $uneLigne["DistanceKm"];
-          echo"Durée passé au controle du matériel :". $uneLigne["TempsPasse"];
-          echo"". $uneLigne[""];
+          echo "<div class='resultat-item'>";
+          echo "<table>";
+          echo "<tr><th>Nom prénom employé</th><th>Nombre d'interventions réalisées</th><th>Nombre total de kilomètres parcourus</th><th>Durée passée au contrôle du matériel</th></tr>";
+          echo "<tr>";
+          echo "<td>" . $uneLigne["NomEmploye"] . " " . $uneLigne["PrenomEmploye"] . "</td>";
+          echo "<td>" . $uneLigne["NombreInterventions"] . "</td>";
+          echo "<td>" . $uneLigne["DistanceTotaleKm"] . "</td>";
+          echo "<td>" . $uneLigne["TempsTotalPasse"] . "</td>";
+          echo "</tr>";
+          echo "</table>";
+          echo "</div>";
+            
         }
-
     } else {
-
+        echo "<p>Aucun résultat trouvé.</p>";
     }
 }
 ?>
-  </div>
 </body>
 </html>
