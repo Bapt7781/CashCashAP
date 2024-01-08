@@ -19,13 +19,13 @@ function login($matriculeU, $mdpU) {
         $_SESSION["matriculeU"] = $matriculeU;
         $_SESSION["mdpU"] = $mdpBD;
     }
-        // Récupération du rôle
-        $role = getRole($matriculeU);
+    // Récupération du rôle
+    $role = getRole($matriculeU);
 
-        // Stockage du rôle dans la session
-        if ($role == 'technicien' || $role == 'assistant') {
-            $_SESSION["role"] = $role;
-        }
+    // Stockage du rôle dans la session
+    if ($role == 'technicien' || $role == 'assistant') {
+        $_SESSION["role"] = $role;
+    }
 }
 
 
