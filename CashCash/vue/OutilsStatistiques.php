@@ -75,7 +75,6 @@
     border-collapse: collapse;
     margin-top: 15px;
   }
-
   .resultat-item th, .resultat-item td {
     border: 1px solid #ddd;
     padding: 8px;
