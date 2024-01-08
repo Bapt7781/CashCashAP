@@ -3,6 +3,7 @@
 function controleurPrincipal($action) {
     $lesActions = array();
     $lesActions["defaut"] = "connexion.php";
+    $lesActions["deconnexion"] = "deconnexion.php";
     $lesActions["authentification"] = "connexion.php";
     $lesActions["RechercherIntervention"] = "RechercherIntervention.php";
     $lesActions["Statistiques"] = "Outils.php";

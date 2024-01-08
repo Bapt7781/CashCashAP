@@ -13,11 +13,19 @@ if (isset($_SESSION["role"])) {
     }
 }
 // Traitement du formulaire si le bouton a été soumis
-if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["logout"])) {
-    logout();
-    header("Location: $racine/controleur/connexion.php"); // Redirection vers la page d'authentification
-    exit();
-}
+// if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["logout"])) {
+    
+//     try {
+//         logout();
+    
+//         header("Cache-Control: no-cache, must-revalidate");
+//         header("Location: $racine/index.php"); // Redirection vers la page d'authentification
+//         exit();
+//     } catch (Exception $e) {
+//         echo 'Erreur : ',  $e->getMessage(), "\n";
+//     }
+    
+// }
 ?>
 
 <!DOCTYPE html>
@@ -35,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["logout"])) {
 
 
 <!-- Formulaire avec un bouton de déconnexion -->
-<form method="post">
+<form method="post" action="./?action=deconnexion">
     <button type="submit" class="btn btn-primary" name="logout">Déconnexion</button>
 </form>
 

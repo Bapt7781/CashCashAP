@@ -7,8 +7,7 @@ include_once "$racine/modele/authentification.inc.php";
 // recuperation des donnees GET, POST, et SESSION
 if (isset($_POST["matriculeU"]) && isset($_POST["mdpU"])){
     $matriculeU=$_POST["matriculeU"];
-    $mdpU=$_POST["mdpU"];
-    
+    $mdpU=$_POST["mdpU"];   
 }
 else
 {
