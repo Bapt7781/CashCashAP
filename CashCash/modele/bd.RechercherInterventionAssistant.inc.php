@@ -74,40 +74,41 @@ function getInformationIntervention($idIntervention) {
             return null; // Aucune intervention trouvée avec cet identifiant
         }
 
-        // Utiliser un tableau associatif pour stocker les informations sur les numéros de série
-        $numerosSerie = array();
-
         // Afficher le formulaire prérempli
         echo "<h2>Modifier l'intervention :</h2>";
         echo "<form action='./?action=ValiderInformation' method='post'>";
-        
-        // Afficher une seule fois le numéro d'intervention, l'heure de visite et la date de visite
+
+        // Section pour modifier l'heure, la date de visite et les informations du client
+        echo "<h3>Modifier l'heure, la date de visite et les informations du client :</h3>";
         $resultat = $req->fetch(PDO::FETCH_ASSOC);
         echo "<input type='hidden' name='numero_intervention' value='" . $resultat['NumeroIntervention'] . "'>";
         echo "Date de visite: <input type='date' name='date_visite' value='" . $resultat['DateVisite'] . "'><br>";
         echo "Heure de visite: <input type='time' name='heure_visite' value='" . $resultat['HeureVisite'] . "'><br>";
+        echo "Numéro du client: <input type='text' name='numero_client' value='" . $resultat['NumeroClient'] . "' readonly><br>";
 
-        // Continuer à afficher les autres numéros de série
-        do {
-            echo "Numéro du client: <input type='text' name='numero_client[]' value='" . $resultat['NumeroClient'] . "' readonly><br>";
+        // Section pour modifier les numéros de série
+        echo "<h3>Modifier les numéros de série :</h3>";
+        $req->execute(); // Réexécuter la requête pour récupérer à nouveau les résultats
+        while ($resultat = $req->fetch(PDO::FETCH_ASSOC)) {
+            echo "<div class='controle-block'>";
             echo "Numéro de série du matériel: <input type='text' name='numero_serie[]' value='" . $resultat['NumeroDeSerie'] . "'><br>";
             echo "Temps passé: <input type='time' name='temps_passe[]' value='" . $resultat['TempsPasse'] . "'><br>";
             echo "Commentaire : <input type='text' name='commentaire[]' value='" . $resultat['Commentaire'] . "'><br>";
-            
-            // Stocker les numéros de série dans le tableau associatif
-            $numerosSerie[$resultat['NumeroDeSerie']] = $resultat['NumeroClient'];
+            echo "</div>";
+        }
 
-        } while ($resultat = $req->fetch(PDO::FETCH_ASSOC));
+        // Ajouter un champ pour saisir un nouveau contrôle de matériel
+        echo "<div id='nouveauControle'>";
+        echo "<h3>Nouveau Contrôle de Matériel :</h3>";
+        echo "Nouveau Numéro de série: <input type='text' name='nouveau_numero_serie[]'><br>";
+        echo "Nouveau Temps passé: <input type='time' name='nouveau_temps_passe[]'><br>";
+        echo "Nouveau Commentaire : <input type='text' name='nouveau_commentaire[]'><br>";
+        echo "</div>";
 
-        // Stocker les numéros de série dans un champ masqué pour utilisation future
-        echo "<input type='hidden' name='numeros_serie' value='" . json_encode($numerosSerie) . "'>";
-
-        // Ajoutez d'autres champs selon votre structure de base de données
-
+        // Ajouter des boutons pour ajouter et soumettre le formulaire
+        echo "<button type='button' id='ajouterControle' onclick='ajouterControle()'>Ajouter Contrôle</button><br>";
         echo "<button type='submit'>Valider les modifications</button>";
-        // Ajouter l'espace entre les boutons
-        echo "&nbsp;&nbsp;&nbsp;";
-        
+
         // Ajouter le bouton Annuler qui recharge la page
         echo "<button type='button' onclick='window.location.reload();'>Annuler</button>";
         echo "</form>";
@@ -122,34 +123,6 @@ function getInformationIntervention($idIntervention) {
 
 
 
-function updateInformationIntervention($idIntervention, $dateVisite, $heureVisite, $numerosSerie, $tempsPasse, $commentaires) {
-    try {
-        $cnx = connexionPDO();
-
-        // Mettre à jour les informations de l'intervention
-        $updateIntervention = $cnx->prepare("UPDATE intervention SET DateVisite = :dateVisite, HeureVisite = :heureVisite WHERE NumeroIntervention = :idIntervention");
-        $updateIntervention->bindParam(':idIntervention', $idIntervention, PDO::PARAM_INT);
-        $updateIntervention->bindParam(':dateVisite', $dateVisite, PDO::PARAM_STR);
-        $updateIntervention->bindParam(':heureVisite', $heureVisite, PDO::PARAM_STR);
-        $updateIntervention->execute();
-
-        // Mettre à jour les informations des numéros de série
-        foreach ($numerosSerie as $key => $numeroSerie) {
-            $updateControler = $cnx->prepare("UPDATE controler SET TempsPasse = :tempsPasse, Commentaire = :commentaire WHERE NumeroIntervention = :idIntervention AND NumeroDeSerie = :numeroSerie");
-            $updateControler->bindParam(':idIntervention', $idIntervention, PDO::PARAM_INT);
-            $updateControler->bindParam(':numeroSerie', $key, PDO::PARAM_STR);
-            $updateControler->bindParam(':tempsPasse', $tempsPasse[$key], PDO::PARAM_STR);
-            $updateControler->bindParam(':commentaire', $commentaires[$key], PDO::PARAM_STR);
-            $updateControler->execute();
-        }
-
-        return true; // Succès de la mise à jour
-
-    } catch (PDOException $e) {
-        print "Erreur !: " . $e->getMessage();
-        return false; // Échec de la mise à jour
-    }
-}
 
 
 

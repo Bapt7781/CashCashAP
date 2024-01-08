@@ -3,7 +3,7 @@
 <form class="form" action="./?action=RechercherIntervention" method="POST">
     <label for="Date_Intervention">Date intervention :</label>
     <input name="Date_Intervention" id="Date_Intervention" type="date"/>
-
+    
     <h3> OU </h3>
 
     <label for="Numero_Technicien">Numéro technicien :</label>
