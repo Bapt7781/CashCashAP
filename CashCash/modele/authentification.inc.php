@@ -19,13 +19,13 @@ function login($matriculeU, $mdpU) {
         $_SESSION["matriculeU"] = $matriculeU;
         $_SESSION["mdpU"] = $mdpBD;
     }
-        // Récupération du rôle
-        $role = getRole($matriculeU);
+    // Récupération du rôle
+    $role = getRole($matriculeU);
 
-        // Stockage du rôle dans la session
-        if ($role == 'technicien' || $role == 'assistant') {
-            $_SESSION["role"] = $role;
-        }
+    // Stockage du rôle dans la session
+    if ($role == 'technicien' || $role == 'assistant') {
+        $_SESSION["role"] = $role;
+    }
 }
 
 
@@ -34,9 +34,27 @@ function logout() {
     if (!isset($_SESSION)) {
         session_start();
     }
+
+    // Ajouter un message de débogage pour confirmer le début de la fonction
+    error_log("Début de la fonction logout");
+
+    // Supprimer les variables de session
     unset($_SESSION["matriculeU"]);
     unset($_SESSION["mdpU"]);
+
+    // Ajouter un message de débogage pour confirmer la suppression des variables de session
+    error_log("Variables de session supprimées");
+
+    // détruire la session complètement
+    session_unset();
+    session_destroy();
+
+    // Ajouter un message de débogage pour confirmer la fin de la fonction
+    error_log("Fin de la fonction logout");
+
 }
+
+
 
 function getMatriculeULoggedOn(){
     if (isLoggedOn()){
