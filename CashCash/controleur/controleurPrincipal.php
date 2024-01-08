@@ -6,6 +6,8 @@ function controleurPrincipal($action) {
     $lesActions["authentification"] = "connexion.php";
     $lesActions["RechercherIntervention"] = "RechercherIntervention.php";
     $lesActions["Statistiques"] = "Outils.php";
+    $lesActions["ModifierIntervention"] = "ModifierIntervention.php";
+    $lesActions["ValiderInformation"] = "ValiderInformation.php";
     
 
     if (array_key_exists($action, $lesActions)) {

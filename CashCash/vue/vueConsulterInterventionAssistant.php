@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "Numéro de l'intervention: " . $ligne['NumeroIntervention'];
 
             // Bouton de modification
-            echo "<form action='./?action=RechercherIntervention' method='post'>";
+            echo "<form action='./?action=ModifierIntervention' method='post'>";
             echo "<input type='hidden' name='numero_intervention' value='" . $ligne['NumeroIntervention'] . "'>";
             echo "<button type='submit'>Modifier</button>";
             echo "</form>";
@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         echo "</ul>";
     } else {
-        echo "Aucune intervention trouvée pour la date spécifiée.";
+        echo "Aucune intervention trouvée.";
     }
 }
 ?>
