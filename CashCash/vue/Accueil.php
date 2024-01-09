@@ -5,20 +5,7 @@ include_once "$racine/modele/authentification.inc.php";
 if (isset($_SESSION["role"])) {
     $role = $_SESSION["role"];
 }
-// Traitement du formulaire si le bouton a été soumis
-// if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["logout"])) {
-    
-//     try {
-//         logout();
-    
-//         header("Cache-Control: no-cache, must-revalidate");
-//         header("Location: $racine/index.php"); // Redirection vers la page d'authentification
-//         exit();
-//     } catch (Exception $e) {
-//         echo 'Erreur : ',  $e->getMessage(), "\n";
-//     }
-    
-// }
+
 ?>
 
 <!DOCTYPE html>
@@ -35,54 +22,56 @@ if (isset($_SESSION["role"])) {
 <!-- Contenu de la page d'accueil -->
 
 <?php 
-    if ($role == "assistant") { //Affichage ci-dessous correspond aux techniciens
+    if ($role == "assistant") { //Affichage ci-dessous correspond aux assistants
     ?>
-    <div class="container mt-5">
-        <div class="titre text-center mb-5"><h1>CashCash</h1></div>
-        <div class="row mx-5">
-            <div class="card col-md-6 mx-3 mb-3 text-center" style="width: 35rem;" >
-                <div class="card-body bg-light p-3" >
-                    <h5 class="card-title">Consulter les interventions</h5>
-                    <a href="./?action=RechercherIntervention" class="btn btn-primary ">Redirection</a>
-                </div>
-                <div class="d-flex align-items-center justify-content-center">
-                    <img src="./images/ScreenConsulterIntervention.png" class="card-img-bottom" >
-                </div>
+<div class="container mt-5">
+    <div class="titre text-center mb-5"><h1>CashCash</h1></div>
+    <div class="row mx-5">
+        <div class="card col-md-6 mx-3 mb-3 text-center" style="width: 35rem;">
+            <div class="card-body bg-light p-3">
+                <h5 class="card-title">Consulter les interventions</h5>
+                <a href="./?action=RechercherIntervention" class="btn btn-primary">Redirection</a>
             </div>
-
-            <div class="card col-md-6 mx-3 mb-3 text-center" style="width: 35rem;">
-                <div class="card-body">
-                    <h5 class="card-title">Outil statistique</h5>
-                    <a href="#" class="btn btn-primary">Redireciton</a>
-                </div>
-                <div class="d-flex align-items-center justify-content-center">
-                    <img src="./images/ScreenOutilStatistique.png" class="card-img-bottom" style="width: 80%; height: 90%;">
-                </div>  
+            <div class="d-flex align-items-center justify-content-center" style="height: 100%;">
+                <img src="./images/ScreenConsulterIntervention.png" class="card-img-bottom">
             </div>
+        </div>
 
-            <div class="card col-6 mx-3 mb-3" style="width: 35rem;">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
+
+        <div class="card col-md-6 mx-3 mb-3 text-center" style="width: 35rem;">
+            <div class="card-body bg-light p-3">
+                <h5 class="card-title">Outil statistique</h5>
+                <a href="./?action=Statistiques" class="btn btn-primary">Redirection</a>
             </div>
+        <div class="d-flex align-items-center justify-content-center" style="height: 100%;">
+            <img src="./images/ScreenOutilStats.png" class="card-img-bottom" style="width: 80%; height: 95%;">
+            </div>  
+        </div>
 
-            <div class="card col-6 mx-3 mb-3" style="width: 35rem;">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
+        <div class="card col-md-6 mx-3 mb-3 text-center" style="width: 35rem;">
+            <div class="card-body bg-light p-3">
+                <h5 class="card-title">Rechercher une fiche</h5>
+                <a href="./?action=RechercheFiche" class="btn btn-primary">Redirection</a>
+            </div>
+        <div class="d-flex align-items-center justify-content-center mb-3" style="margin-top: 3%;">
+            <img src="./images/ScreenRechercheFiche.png" class="card-img-bottom" style="width: 80%; height: 95%;">
+            </div>  
+        </div>
+
+        <div class="card col-6 mx-3 mb-3" style="width: 35rem;">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
             </div>
         </div>
     </div>
+</div>
 <?php } ?>
 
 <?php 
-    if ($role == "technicien") { //Affichage ci-dessous correspond aux assistants
+    if ($role == "technicien") { //Affichage ci-dessous correspond aux techniciens
     ?>
 
 
