@@ -37,48 +37,49 @@ if (isset($_SESSION["role"])) {
 <?php 
     if ($role == "assistant") { //Affichage ci-dessous correspond aux techniciens
     ?>
-    <div class="container mt-5">
-        <div class="titre text-center mb-5"><h1>CashCash</h1></div>
-        <div class="row mx-5">
-            <div class="card col-md-6 mx-3 mb-3 text-center" style="width: 35rem; height: " >
-                <div class="card-body bg-light p-3" >
-                    <h5 class="card-title">Consulter les interventions</h5>
-                    <a href="./?action=RechercherIntervention" class="btn btn-primary ">Redirection</a>
-                </div>
-                <div class="d-flex align-items-center justify-content-center">
-                    <img src="./images/ScreenConsulterIntervention.png" class="card-img-bottom" >
-                </div>
+<div class="container mt-5">
+    <div class="titre text-center mb-5"><h1>CashCash</h1></div>
+    <div class="row mx-5">
+        <div class="card col-md-6 mx-3 mb-3 text-center" style="width: 35rem;">
+            <div class="card-body bg-light p-3">
+                <h5 class="card-title">Consulter les interventions</h5>
+                <a href="./?action=RechercherIntervention" class="btn btn-primary">Redirection</a>
             </div>
-
-            <div class="card col-md-6 mx-3 mb-3 text-center" style="width: 35rem;">
-                <div class="card-body">
-                    <h5 class="card-title">Outil statistique</h5>
-                    <a href="./?action=Statistiques" class="btn btn-primary">Redireciton</a>
-                </div>
-                <div class="d-flex align-items-center justify-content-center">
-                    <img src="./images/ScreenOutilStatistique.png" class="card-img-bottom" style="width: 80%; height: 90%;">
-                </div>  
+            <div class="d-flex align-items-center justify-content-center" style="height: 100%;">
+                <img src="./images/ScreenConsulterIntervention.png" class="card-img-bottom">
             </div>
+        </div>
 
-            <div class="card col-6 mx-3 mb-3" style="width: 35rem;">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
+
+        <div class="card col-md-6 mx-3 mb-3 text-center" style="width: 35rem;">
+            <div class="card-body bg-light p-3">
+                <h5 class="card-title">Outil statistique</h5>
+                <a href="./?action=Statistiques" class="btn btn-primary">Redireciton</a>
             </div>
+        <div class="d-flex align-items-center justify-content-center">
+            <img src="./images/ScreenOutilStatistique.png" class="card-img-bottom" style="width: 80%; height: 90%;">
+            </div>  
+        </div>
 
-            <div class="card col-6 mx-3 mb-3" style="width: 35rem;">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
+        <div class="card col-6 mx-3 mb-3" style="width: 35rem;">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+        </div>
+
+        <div class="card col-6 mx-3 mb-3" style="width: 35rem;">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
             </div>
         </div>
     </div>
+</div>
 <?php } ?>
 
 <?php 
