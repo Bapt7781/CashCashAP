@@ -43,8 +43,8 @@ if (isset($_SESSION["role"])) {
                 <h5 class="card-title">Outil statistique</h5>
                 <a href="./?action=Statistiques" class="btn btn-primary">Redirection</a>
             </div>
-        <div class="d-flex align-items-center justify-content-center">
-            <img src="./images/ScreenOutilStatistiques.png" class="card-img-bottom" style="width: 80%; height: 90%;">
+        <div class="d-flex align-items-center justify-content-center" style="height: 100%;">
+            <img src="./images/ScreenOutilStats.png" class="card-img-bottom" style="width: 80%; height: 95%;">
             </div>  
         </div>
 
@@ -53,8 +53,8 @@ if (isset($_SESSION["role"])) {
                 <h5 class="card-title">Rechercher une fiche</h5>
                 <a href="./?action=RechercheFiche" class="btn btn-primary">Redirection</a>
             </div>
-        <div class="d-flex align-items-center justify-content-center">
-            <img src="./images/ScreenRechercherFiche.png" class="card-img-bottom" style="width: 80%; height: 90%;">
+        <div class="d-flex align-items-center justify-content-center mb-3" style="margin-top: 3%;">
+            <img src="./images/ScreenRechercheFiche.png" class="card-img-bottom" style="width: 80%; height: 95%;">
             </div>  
         </div>
 
