@@ -79,8 +79,7 @@
                 <input type="number" name="numero_client" class="form-control" placeholder="Ex: 18">
                 <button type="submit">Valider</button>
                 <?php
-                if (isLoggedOn()){
-                }
+
                 ?>
             </form>
         </div>

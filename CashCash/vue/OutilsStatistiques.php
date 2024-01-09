@@ -44,7 +44,7 @@
     button {
       width: 100%;
       padding: 10px;
-      background-color: #3498db;
+      background-color: #007BFF;
       color: #fff;
       border: none;
       border-radius: 4px;
@@ -53,7 +53,7 @@
     }
 
     button:hover {
-      background-color: #2980b9;
+      background-color: #0056b3;
     }
     #resultat-container {
   margin-top: 20px;
