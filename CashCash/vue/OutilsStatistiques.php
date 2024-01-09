@@ -115,7 +115,10 @@
     </select>
 
     <label for="annee">Année :</label>
-    <input type="number" name="annee" min="1900" max="2100">
+    <input type="text" name="annee" required oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="4">
+
+
+
 
     <button type="submit">Afficher les Interventions</button>
 
