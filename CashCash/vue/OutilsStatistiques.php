@@ -89,11 +89,26 @@
   .resultat-item tr:nth-child(even) {
     background-color: #F8F8FF;
   }
+  a#accueil{
+  width: 100px;
+  padding: 10px;
+  background-color: #6c757d;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 17px;
+}
 
   </style>
   <title>Sélection du Mois et de l'Année</title>
 </head>
 <body>
+  <a id="accueil" href="./?defaut">Accueil</a>
   <div class="calendrier">
     <h1>Sélection du Mois et de l'Année</h1>
 
