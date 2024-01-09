@@ -40,7 +40,7 @@ if (isset($_SESSION["role"])) {
     <div class="container mt-5">
         <div class="titre text-center mb-5"><h1>CashCash</h1></div>
         <div class="row mx-5">
-            <div class="card col-md-6 mx-3 mb-3 text-center" style="width: 35rem;" >
+            <div class="card col-md-6 mx-3 mb-3 text-center" style="width: 35rem; height: " >
                 <div class="card-body bg-light p-3" >
                     <h5 class="card-title">Consulter les interventions</h5>
                     <a href="./?action=RechercherIntervention" class="btn btn-primary ">Redirection</a>
@@ -53,7 +53,7 @@ if (isset($_SESSION["role"])) {
             <div class="card col-md-6 mx-3 mb-3 text-center" style="width: 35rem;">
                 <div class="card-body">
                     <h5 class="card-title">Outil statistique</h5>
-                    <a href="#" class="btn btn-primary">Redireciton</a>
+                    <a href="./?action=Statistiques" class="btn btn-primary">Redireciton</a>
                 </div>
                 <div class="d-flex align-items-center justify-content-center">
                     <img src="./images/ScreenOutilStatistique.png" class="card-img-bottom" style="width: 80%; height: 90%;">
