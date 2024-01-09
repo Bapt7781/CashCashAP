@@ -76,11 +76,11 @@ function getInformationIntervention($idIntervention) {
         $resultat = $req->fetch(PDO::FETCH_ASSOC);
 
         // Afficher le formulaire prérempli
-        echo "<h2>Modifier l'intervention :</h2>";
         echo "<form action='./?action=ValiderInformation' method='post'>";
 
         // Section pour modifier l'heure, la date de visite et les informations du client
         echo "<h3>Modifier l'heure, la date de visite et les informations du client :</h3>";
+        echo "<input type='hidden' name='action' value='modifier'>";//////// test
         echo "<input type='hidden' name='numero_intervention' value='" . $resultat['NumeroIntervention'] . "'>";
         echo "Date de visite: <input type='date' name='date_visite' value='" . $resultat['DateVisite'] . "'><br>";
         echo "Heure de visite: <input type='time' name='heure_visite' value='" . $resultat['HeureVisite'] . "'><br>";
@@ -91,7 +91,7 @@ function getInformationIntervention($idIntervention) {
         echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
 
         echo "<button type='button' class='cancel-button' onclick='window.location.reload();'>Annuler</button>";
-        echo "</form>";?>
+        echo "</form><br><br><br><br>";?>
         <style>.cancel-button {
             background-color: #dc3545;
             color: white;
@@ -105,6 +105,16 @@ function getInformationIntervention($idIntervention) {
             background-color: #b02a37;
         }</style>
         <?php
+
+        echo "<form action='./?action=ValiderInformation' method='post'>";
+        echo "<h3>Nouveau Contrôle de Matériel :</h3>";
+        echo "<input type='hidden' name='action' value='ajouter'>";///////////test
+        echo "Numéro de série du client: <input type='text' name='nouveau_numero_serie[]'><br>";
+        echo "Temps passé: <input type='time' name='nouveau_temps_passe[]'><br>";
+        echo "Commentaire : <input type='text' name='nouveau_commentaire[]'><br>";
+        echo "<button type='submit'>Ajouter le contrôle</button>";
+        echo "</form>";
+
         return $resultat;
 
     } catch (PDOException $e) {
