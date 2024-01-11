@@ -1,4 +1,6 @@
-
+<?php
+include "$racine/vue/entete.php";
+?>
 <link rel="stylesheet" href="./css/RechercheInt.css">
 <form class="form" action="./?action=RechercherIntervention" method="POST">
     <label for="Date_Intervention">Date intervention :</label>
