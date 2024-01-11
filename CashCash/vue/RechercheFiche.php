@@ -1,3 +1,6 @@
+<?php
+include "$racine/vue/entete.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +14,6 @@
             background-color: #f4f4f4;
             margin: 0;
             padding: 0;
-            display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
@@ -24,7 +26,7 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 400px;
+            width: 435px;
         }
 
         .input-group {
@@ -69,10 +71,13 @@
         label{
             font-weight:bold;
         }
+        .formulaire{
+            margin-top: 15%;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="container formulaire">
         <div class="input-group flex-nowrap">
         <form class="form" action="./?action=Recherchefiche" method="POST">
                 <label for="numero client" >Saisir un numéro client</label>
