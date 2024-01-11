@@ -1,5 +1,8 @@
+<?php
+include "$racine/vue/entete.php";
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -80,10 +83,13 @@
                 <button type="submit">Valider</button>
                 <?php
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                    if (isset($_POST["numero_client"])) {
                     $numero_client = $_POST['numero_client'];
 
-                    $Recherchefiche = getRecherchefiche($numclient);
+                    $Recherchefiche = getRecherchefiche($numero_client);
                 }
+            }
+            include "$racine/vue/RechercheFiche.php";
                 ?>
             </form>
         </div>
