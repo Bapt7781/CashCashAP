@@ -18,9 +18,9 @@ function getRecherchefiche($numero_client) {
         LEFT JOIN
             typecontrat ON contratdemaintenance.RefTypeContrat = typecontrat.RefTypeContrat
         WHERE
-            client.NumeroClient = 
+            client.NumeroClient = :numero_client
         ");
-    
+        $req->bindValue(":numero_client", $numero_client, PDO::PARAM_STR);
         $req->execute();
         $resultats = $req->fetchAll(PDO::FETCH_ASSOC);
 

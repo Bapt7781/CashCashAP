@@ -79,7 +79,7 @@ include "$racine/vue/entete.php";
 <body>
     <div class="container formulaire">
         <div class="input-group flex-nowrap">
-        <form class="form" action="./?action=Recherchefiche" method="POST">
+        <form class="form" action="./?action=RechercheFiche" method="POST">
                 <label for="numero client" >Saisir un numéro client</label>
                 <input type="number" name="numero_client" class="form-control" placeholder="Ex: 18">
                 <button type="submit">Valider</button>
@@ -89,9 +89,15 @@ include "$racine/vue/entete.php";
                     $numero_client = $_POST['numero_client'];
 
                     $Recherchefiche = getRecherchefiche($numero_client);
+                    }
+                
+                if (!empty($Recherchefiche)) {
+                    foreach ($Recherchefiche as $uneLigne) {
+                      echo faire une liste deroulante et donc modifier requete pour avoir seulement le numero client dans la listes deroulante pour seulemetn apres avoir selectionner la fiche avoir toutes les informations de la liste de CE client
+                        
+                    }
                 }
             }
-            include "$racine/vue/RechercheFiche.php";
                 ?>
             </form>
         </div>
