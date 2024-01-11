@@ -74,12 +74,16 @@
 <body>
     <div class="container">
         <div class="input-group flex-nowrap">
-            <form method="POST" action="">
+        <form class="form" action="./?action=Recherchefiche" method="POST">
                 <label for="numero client" >Saisir un numéro client</label>
                 <input type="number" name="numero_client" class="form-control" placeholder="Ex: 18">
                 <button type="submit">Valider</button>
                 <?php
+                if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                    $numero_client = $_POST['numero_client'];
 
+                    $Recherchefiche = getRecherchefiche($numclient);
+                }
                 ?>
             </form>
         </div>
