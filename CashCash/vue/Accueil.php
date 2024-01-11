@@ -1,6 +1,6 @@
 <?php
 include_once "$racine/modele/authentification.inc.php";
-
+include "$racine/vue/entete.php";
 // Vérifiez le rôle de l'utilisateur
 if (isset($_SESSION["role"])) {
     $role = $_SESSION["role"];
@@ -25,7 +25,6 @@ if (isset($_SESSION["role"])) {
     if ($role == "assistant") { //Affichage ci-dessous correspond aux assistants
     ?>
 <div class="container mt-5">
-    <div class="titre text-center mb-5"><h1>CashCash</h1></div>
     <div class="row mx-5">
         <div class="card col-md-6 mx-3 mb-3 text-center" style="width: 35rem;">
             <div class="card-body bg-light p-3">
@@ -76,12 +75,7 @@ if (isset($_SESSION["role"])) {
 
 
 <?php } ?>
-<!-- Formulaire avec un bouton de déconnexion -->
-<div class="position-absolute top-0 start-0 mt-3 ms-3">
-    <form method="post" action="./?action=deconnexion">
-        <button type="submit" class="btn btn-secondary" name="logout">Déconnexion</button>
-    </form>
-</div>
+
 
 </body>
 </html>
