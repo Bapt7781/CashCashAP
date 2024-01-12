@@ -25,11 +25,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 'numero_intervention' => $numeroIntervention,
                 'date_visite' => $dateVisite,
                 'heure_visite' => $heureVisite,
-                'numero_client' => $numeroClient,
-                // Ajoutez d'autres champs du formulaire au besoin
-    ]);
-        } elseif($action === 'ajouter') {
+                'numero_client' => $numeroClient,]);
+        } 
+        elseif($action === 'ajouter') {
             // Logique pour l'ajout d'un nouveau contrôle de matériel
+            $numeroIntervention = $_POST['numero_intervention'];
+            $NumeroDeSerie = $_POST['nouveau_numero_serie'];
+            $TempsPasse = $_POST['nouveau_temps_passe'];
+            $Commentaire = $_POST['nouveau_commentaire'];
+
+            ajouteControleIntervention([
+                'NumeroIntervention' => $numeroIntervention,
+                'NumeroDeSerie' => $NumeroDeSerie,
+                'TempsPasse' => $TempsPasse,
+                'Commentaire' => $Commentaire]);
 
         }
     }

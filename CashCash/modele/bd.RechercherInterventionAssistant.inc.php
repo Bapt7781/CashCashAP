@@ -80,7 +80,7 @@ function getInformationIntervention($idIntervention) {
 
         // Section pour modifier l'heure, la date de visite et les informations du client
         echo "<h3>Modifier l'heure, la date de visite et les informations du client :</h3>";
-        echo "<input type='hidden' name='action' value='modifier'>";//////// test
+        echo "<input type='hidden' name='action' value='modifier'>";
         echo "<input type='hidden' name='numero_intervention' value='" . $resultat['NumeroIntervention'] . "'>";
         echo "Date de visite: <input type='date' name='date_visite' value='" . $resultat['DateVisite'] . "'><br>";
         echo "Heure de visite: <input type='time' name='heure_visite' value='" . $resultat['HeureVisite'] . "'><br>";
@@ -108,10 +108,11 @@ function getInformationIntervention($idIntervention) {
 
         echo "<form action='./?action=ValiderInformation' method='post'>";
         echo "<h3>Nouveau Contrôle de Matériel :</h3>";
-        echo "<input type='hidden' name='action' value='ajouter'>";///////////test
-        echo "Numéro de série du client: <input type='text' name='nouveau_numero_serie[]'><br>";
-        echo "Temps passé: <input type='time' name='nouveau_temps_passe[]'><br>";
-        echo "Commentaire : <input type='text' name='nouveau_commentaire[]'><br>";
+        echo "<input type='hidden' name='action' value='ajouter'>";
+        echo "<input type='hidden' name='numero_intervention' value='" . $resultat['NumeroIntervention'] . "'>";
+        echo "Numéro de série du client: <input type='number' name='nouveau_numero_serie'><br>";
+        echo "Temps passé: <input type='time' name='nouveau_temps_passe'><br>";
+        echo "Commentaire : <input type='text' name='nouveau_commentaire'><br>";
         echo "<button type='submit'>Ajouter le contrôle</button>";
         echo "</form>";
 
