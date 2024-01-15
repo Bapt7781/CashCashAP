@@ -1,5 +1,10 @@
 <?php
-include "$racine/vue/entete.php";
+if (isset($_SESSION["role"])) {
+  $role = $_SESSION["role"];
+}
+if (isset($role) && !empty($role)) {
+    if ($role == "assistant") { //Affichage ci-dessous si role = assistant
+        include "$racine/vue/entete.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -90,7 +95,7 @@ include "$racine/vue/entete.php";
     background-color: #F8F8FF;
   }
   </style>
-  <title>Sélection du Mois et de l'Année</title>
+  <title>Outil Statistiques</title>
 </head>
 <body>
   <div class="calendrier">
@@ -156,3 +161,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 </body>
 </html>
+<?php } else{
+    include "$racine/controleur/connexion.php";
+}
+}else {
+    include "$racine/controleur/connexion.php";
+}
+
+?>

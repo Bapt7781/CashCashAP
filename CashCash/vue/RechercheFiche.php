@@ -1,5 +1,10 @@
 <?php
-include "$racine/vue/entete.php";
+if (isset($_SESSION["role"])) {
+    $role = $_SESSION["role"];
+}
+if (isset($role) && !empty($role)) {
+    if ($role == "assistant") { //Affichage ci-dessous si role = assistant
+        include "$racine/vue/entete.php";
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -7,7 +12,7 @@ include "$racine/vue/entete.php";
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestion des Clients</title>
+    <title>Rechercher une Fiche</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -93,7 +98,7 @@ include "$racine/vue/entete.php";
                 
                 if (!empty($Recherchefiche)) {
                     foreach ($Recherchefiche as $uneLigne) {
-                      echo faire une liste deroulante et donc modifier requete pour avoir seulement le numero client dans la listes deroulante pour seulemetn apres avoir selectionner la fiche avoir toutes les informations de la liste de CE client
+                      //echo faire une liste deroulante et donc modifier requete pour avoir seulement le numero client dans la listes deroulante pour seulemetn apres avoir selectionner la fiche avoir toutes les informations de la liste de CE client
                         
                     }
                 }
@@ -107,3 +112,11 @@ include "$racine/vue/entete.php";
     </div>
 </body>
 </html>
+<?php } else{
+    include "$racine/controleur/connexion.php";
+}
+}else {
+    include "$racine/controleur/connexion.php";
+}
+
+?>

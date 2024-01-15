@@ -1,6 +1,8 @@
 <?php
 include_once "bd.inc.php";
 
+VerificationConnexion();
+
 function getInterventionByDate($DateI){
     $resultat = array();
     

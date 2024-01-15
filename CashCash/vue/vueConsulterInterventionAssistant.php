@@ -1,6 +1,14 @@
 <?php
-include "$racine/vue/entete.php";
+// Vérifiez le rôle de l'utilisateur
+if (isset($_SESSION["role"])) {
+    $role = $_SESSION["role"];
+}
+if (isset($role) && !empty($role)) {
+    if ($role == "assistant") { //Affichage ci-dessous si role = assistant
+    include "$racine/vue/entete.php";
+
 ?>
+<title>Consulter les interventions</title>
 <link rel="stylesheet" href="./css/RechercheInt.css">
 <form class="form" action="./?action=RechercherIntervention" method="POST">
     <label for="Date_Intervention">Date intervention :</label>
@@ -40,4 +48,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Aucune intervention trouvée.";
     }
 }
+?>
+<?php } else{
+    include "$racine/controleur/connexion.php";
+}
+}else {
+    include "$racine/controleur/connexion.php";
+}
+
 ?>

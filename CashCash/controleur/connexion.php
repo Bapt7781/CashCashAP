@@ -4,19 +4,7 @@ if ( $_SERVER["SCRIPT_FILENAME"] == __FILE__ ){
 }
 include_once "$racine/modele/authentification.inc.php";
 
-// recuperation des donnees GET, POST, et SESSION
-if (isset($_POST["matriculeU"]) && isset($_POST["mdpU"])){
-    $matriculeU=$_POST["matriculeU"];
-    $mdpU=$_POST["mdpU"];   
-}
-else
-{
-    $matriculeU="";
-    $mdpU="";
-}
-
-// traitement si necessaire des donnees recuperees
-login($matriculeU,$mdpU);
+VerificationConnexion();
 
 if (isLoggedOn()){ // si l'utilisateur est connecté on redirige vers la vue accueil
     include "$racine/vue/Accueil.php";

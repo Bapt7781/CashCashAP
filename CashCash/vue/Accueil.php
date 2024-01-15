@@ -1,5 +1,4 @@
 <?php
-include_once "$racine/modele/authentification.inc.php";
 include "$racine/vue/entete.php";
 // Vérifiez le rôle de l'utilisateur
 if (isset($_SESSION["role"])) {
@@ -23,7 +22,7 @@ if (isset($_SESSION["role"])) {
 
 <?php 
     if ($role == "assistant") { //Affichage ci-dessous correspond aux assistants
-    ?>
+?>
 <div class="container mt-5">
     <div class="row mx-5">
         <div class="card col-md-6 mx-3 mb-3 text-center" style="width: 35rem;">
@@ -39,7 +38,7 @@ if (isset($_SESSION["role"])) {
 
         <div class="card col-md-6 mx-3 mb-3 text-center" style="width: 35rem;">
             <div class="card-body bg-light p-3">
-                <h5 class="card-title">Outil statistique</h5>
+                <h5 class="card-title">Outil statistiques</h5>
                 <a href="./?action=Statistiques" class="btn btn-primary">Redirection</a>
             </div>
         <div class="d-flex align-items-center justify-content-center" style="height: 100%;">

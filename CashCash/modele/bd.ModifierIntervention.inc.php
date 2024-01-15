@@ -1,4 +1,7 @@
 <?php
+
+VerificationConnexion();
+
 function ValiderInformationIntervention($donneesFormulaire) {
     try {
         // Connectez-vous à la base de données

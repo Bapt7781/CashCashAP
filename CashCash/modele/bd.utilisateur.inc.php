@@ -2,6 +2,20 @@
 
 include_once "bd.inc.php";
 
+function VerificationConnexion(){
+    // recuperation des donnees GET, POST, et SESSION
+    if (isset($_POST["matriculeU"]) && isset($_POST["mdpU"])){
+        $matriculeU=$_POST["matriculeU"];
+        $mdpU=$_POST["mdpU"];   
+    }
+    else
+    {
+        $matriculeU="";
+        $mdpU="";
+    }
+    login($matriculeU,$mdpU);
+}
+
 function getEmploye() {
 
     try {

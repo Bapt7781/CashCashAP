@@ -1,5 +1,8 @@
 <?php
 include_once "bd.inc.php";
+
+VerificationConnexion();
+
 function getStatistiques($dateDebut, $dateFin){
     try{
         $cnx = connexionPDO();
