@@ -10,6 +10,7 @@ function controleurPrincipal($action) {
     $lesActions["ModifierIntervention"] = "ModifierIntervention.php";
     $lesActions["ValiderInformation"] = "ValiderInformation.php";
     $lesActions["RechercheFiche"] = "Fiche.php";
+    $lesActions["AffectationVisite"] = "AffectationVisite.php";
     
 
     if (array_key_exists($action, $lesActions)) {

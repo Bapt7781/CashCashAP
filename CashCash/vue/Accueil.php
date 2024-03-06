@@ -56,13 +56,14 @@ if (isset($_SESSION["role"])) {
             </div>  
         </div>
 
-        <div class="card col-6 mx-3 mb-3" style="width: 35rem;">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+        <div class="card col-md-6 mx-3 mb-3 text-center" style="width: 35rem;">
+            <div class="card-body bg-light p-3">
+                <h5 class="card-title">Affecter une Visite</h5>
+                <a href="./?action=AffectationVisite" class="btn btn-primary">Redirection</a>
             </div>
+        <div class="d-flex align-items-center justify-content-center mb-3" style="margin-top: 3%;">
+            
+            </div>  
         </div>
     </div>
 </div>
