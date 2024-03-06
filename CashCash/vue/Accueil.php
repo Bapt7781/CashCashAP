@@ -8,7 +8,7 @@ if (isset($_SESSION["role"])) {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -56,6 +56,8 @@ if (isset($_SESSION["role"])) {
             </div>  
         </div>
 
+<<<<<<< HEAD
+=======
         <div class="card col-md-6 mx-3 mb-3 text-center" style="width: 35rem;">
             <div class="card-body bg-light p-3">
                 <h5 class="card-title">Affecter une Visite</h5>
@@ -65,14 +67,27 @@ if (isset($_SESSION["role"])) {
             <img src="./images/ScreenRechercheFiche.png" class="card-img-bottom" style="width: 80%; height: 95%;">
             </div>  
         </div>
+>>>>>>> b61c04d5fc8120dc01b8ba5718705fa6ee69f2bb
     </div>
 </div>
 <?php } ?>
 
 <?php 
     if ($role == "technicien") { //Affichage ci-dessous correspond aux techniciens
-    ?>
-
+?>
+<div class="container mt-5">
+    <div class="row mx-5">
+        <div class="card col-md-6 mx-3 mb-3 text-center" style="width: 35rem;">
+            <div class="card-body bg-light p-3">
+                <h5 class="card-title">Consulter les interventions</h5>
+                <a href="./?action=ValiderIntervention" class="btn btn-primary">Redirection</a>
+            </div>
+            <div class="d-flex align-items-center justify-content-center" style="height: 100%;">
+                <img src="" class="card-img-bottom">
+            </div>
+        </div>
+    </div>
+</div>
 
 <?php } ?>
 
