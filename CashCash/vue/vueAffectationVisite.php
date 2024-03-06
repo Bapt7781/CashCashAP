@@ -1,8 +1,4 @@
 <?php
-if (isset($_SESSION["role"])) {
-    $role = $_SESSION["role"];
-    
-}
 
 if (isset($role) && !empty($role)) {
     if ($role == "assistant") { //Affichage ci-dessous si role = assistant
@@ -11,10 +7,10 @@ if (isset($role) && !empty($role)) {
 ?>
 <p>t</p>
 <?php } else{
+    echo 'p'
     include "$racine/controleur/connexion.php";
 }
 }else {
     include "$racine/controleur/connexion.php";
 }
-
 ?>
