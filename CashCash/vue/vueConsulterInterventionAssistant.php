@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         echo "</ul>";
-    } else {
+    } else {    
         echo "Aucune intervention trouvée.";
     }
 }

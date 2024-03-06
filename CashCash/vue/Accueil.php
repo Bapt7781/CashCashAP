@@ -56,6 +56,18 @@ if (isset($_SESSION["role"])) {
             </div>  
         </div>
 
+<<<<<<< HEAD
+=======
+        <div class="card col-md-6 mx-3 mb-3 text-center" style="width: 35rem;">
+            <div class="card-body bg-light p-3">
+                <h5 class="card-title">Affecter une Visite</h5>
+                <a href="./?action=AffectationVisite" class="btn btn-primary">Redirection</a>
+            </div>
+        <div class="d-flex align-items-center justify-content-center mb-3" style="margin-top: 3%;">
+            
+            </div>  
+        </div>
+>>>>>>> b61c04d5fc8120dc01b8ba5718705fa6ee69f2bb
     </div>
 </div>
 <?php } ?>
