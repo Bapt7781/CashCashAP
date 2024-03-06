@@ -26,16 +26,38 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 'date_visite' => $dateVisite,
                 'heure_visite' => $heureVisite,
                 'numero_client' => $numeroClient,]);
-        } 
-        elseif($action === 'ajouter') {
+        }elseif($action === 'MaterielModif'){
+            $NumeroIntervention = $_POST['numero_intervention']; 
+            $AncienNumSerie = $_POST['controle_numero_serieAc'];
+            $NouveauNumSerie = $_POST['controle_numero_serieNv'];
+            $TempsPasse = $_POST['controle_temps_passe'];
+            $Commentaire = $_POST['controle_commentaire'];
+
+            ModificationControleIntervention([
+                'NumeroIntervention' => $NumeroIntervention,
+                'AncienNumSerie' => $AncienNumSerie,
+                'NouveauNumSerie' => $NouveauNumSerie,
+                'TempsPasse' => $TempsPasse,
+                'Commentaire' => $Commentaire,]);
+        }elseif ($action === 'Supp') {
+            
+            $NumeroIntervention = $_POST['numero_intervention'];
+            $NumSerie = $_POST['controle_numero_serieAc']; // Utiliser le bon nom de champ caché
+            
+        
+            SuppressionControleIntervention([
+                'NumeroIntervention' => $NumeroIntervention,
+                'NumSerie' => $NumSerie,
+            ]);
+        }elseif($action === 'ajouter') {
             // Logique pour l'ajout d'un nouveau contrôle de matériel
-            $numeroIntervention = $_POST['numero_intervention'];
+            $NumeroIntervention = $_POST['numero_intervention'];           
             $NumeroDeSerie = $_POST['nouveau_numero_serie'];
             $TempsPasse = $_POST['nouveau_temps_passe'];
             $Commentaire = $_POST['nouveau_commentaire'];
 
             ajouteControleIntervention([
-                'NumeroIntervention' => $numeroIntervention,
+                'NumeroIntervention' => $NumeroIntervention,
                 'NumeroDeSerie' => $NumeroDeSerie,
                 'TempsPasse' => $TempsPasse,
                 'Commentaire' => $Commentaire]);
