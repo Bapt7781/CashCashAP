@@ -62,7 +62,7 @@ if (isset($_SESSION["role"])) {
                 <a href="./?action=AffectationVisite" class="btn btn-primary">Redirection</a>
             </div>
         <div class="d-flex align-items-center justify-content-center mb-3" style="margin-top: 3%;">
-            
+            <img src="./images/ScreenRechercheFiche.png" class="card-img-bottom" style="width: 80%; height: 95%;">
             </div>  
         </div>
     </div>
