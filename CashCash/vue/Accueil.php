@@ -8,7 +8,7 @@ if (isset($_SESSION["role"])) {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -56,22 +56,26 @@ if (isset($_SESSION["role"])) {
             </div>  
         </div>
 
-        <div class="card col-6 mx-3 mb-3" style="width: 35rem;">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-        </div>
     </div>
 </div>
 <?php } ?>
 
 <?php 
     if ($role == "technicien") { //Affichage ci-dessous correspond aux techniciens
-    ?>
-
+?>
+<div class="container mt-5">
+    <div class="row mx-5">
+        <div class="card col-md-6 mx-3 mb-3 text-center" style="width: 35rem;">
+            <div class="card-body bg-light p-3">
+                <h5 class="card-title">Consulter les interventions</h5>
+                <a href="./?action=ValiderIntervention" class="btn btn-primary">Redirection</a>
+            </div>
+            <div class="d-flex align-items-center justify-content-center" style="height: 100%;">
+                <img src="" class="card-img-bottom">
+            </div>
+        </div>
+    </div>
+</div>
 
 <?php } ?>
 
