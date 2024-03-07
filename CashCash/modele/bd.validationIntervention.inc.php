@@ -79,8 +79,17 @@ function addInformationToBdd($numeroIntervention, $NumeroDeSerie, $tempsPasse, $
         $req->bindParam(':commentaire', $commentaire, PDO::PARAM_STR);
         $req->bindParam(':tempsPasse', $tempsPasse, PDO::PARAM_STR);
 
-        $req->execute();
+        $result = $req->execute();
 
+        echo '<script>';
+        if ($result) {
+            echo 'alert("ajout réussie !");';
+            echo 'window.location.href="?action=ValiderInterventionSuccess";';
+        } else {
+            echo `alert("Échec de l'ajout.");`;
+            echo 'window.location.href="?action=ValiderInterventionSuccess";';
+        }
+        echo '</script>';
 
     } catch (PDOException $e) {
         echo "Erreur : " . $e->getMessage();
