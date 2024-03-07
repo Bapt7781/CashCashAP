@@ -41,23 +41,70 @@ foreach ($information as $uneLigne) {
             <td><?php echo $uneLigne["DistanceKm"]; ?></td>
             <td>
             <button type="button" class="btn btn-primary" 
-                data-bs-toggle="modal" data-bs-target="#ValidationModal"
-                data-numero-intervention="<?php echo $numeroIntervention; ?>">Valider</button>
+            data-bs-toggle="modal" data-bs-target="#ValidationModal_<?php echo $numeroIntervention; ?>"
+                >Valider</button>
             </td>        
         </tr>
+        <div class="modal" tabindex="-1" id="ValidationModal_<?php echo $numeroIntervention; ?>">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title">Confirmation</h3>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                    </div>
+                    <div class="modal-body">
+                        <?php
+                        $informationForModal = getInformationForModal($numeroIntervention);
+                        if (empty($informationForModal)){
+                            ?>
+                            <h5>Il n'y a aucun materiel à vérifier</h5>
+                            <?php
+                        }else { 
+                            foreach ($informationForModal as $uneLigne){
+                                echo "<h5>".$uneLigne['LibelleTypeMateriel']."</h5>";
+                            ?>
+                            <form method="post" action="">
+                                <div class="form-floating">
+                                    <textarea class="form-control" placeholder="Commentaire" id="floatingTextarea2" name="commentaire" style="height: 100px" maxlength="150"></textarea>
+                                    <label for="floatingTextarea2">Commentaire</label>
+                                </div>
+                                <div class="cs-form mb-2">
+                                    <label for="floatingInput">Temps passé</label>
+                                    <input value="00:00:00" class="form-control" type="time" step="1" id="floatingInput" name="tempsPasse">
+                                </div>
+                                <input type="hidden" name="numeroIntervention" value="<?php echo $numeroIntervention; ?>">
+                                <input type="hidden" name="numeroDeSerie" value="<?php echo $uneLigne['NumeroDeSerie']; ?>">
+                                <div>
+                                    <button type="submit" class="btn btn-success">Confirmer</button>
+                                </div>
+                            </form>
+                                <br>
+                            <?php
+                            }
+                        }
+                        ?>
+                    </div>
+                </div>
+            </div>
+        </div>
 <?php
         // Ajouter le numéro d'intervention au tableau des interventions déjà affichées
         $interventionsDejaAffichees[] = $numeroIntervention;
     }
 }
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $commentaire = $_POST["commentaire"];
+    $tempsPasse = $_POST["tempsPasse"];
+    $numeroIntervention = $_POST["numeroIntervention"];
+    $numeroDeSerie = $_POST["numeroDeSerie"];
+
+    addInformationToBdd($numeroIntervention, $numeroDeSerie, $tempsPasse, $commentaire);
+}
 ?>
 
     </tbody>
 </table>
-<!-- Boîte de dialogue modale -->
-<div class="modal" tabindex="-1" id="ValidationModal">
-    <?php include "$racine/vue/vueModalValidation.php";; ?>
-</div>
 </body>
 </html>
 <?php
