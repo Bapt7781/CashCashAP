@@ -59,7 +59,7 @@ if (isset($role) && !empty($role)) {
                 <input type='hidden' name='numero_intervention' value='<?php echo $controle['NumeroIntervention']; ?>'>
                 <input type='hidden' name='controle_numero_serieAc' value='<?php echo $controle['NumeroDeSerie']; ?>'>
                 Numéro de série du matériel: <input type='number' name='controle_numero_serieNv' value='<?php echo $controle['NumeroDeSerie'] ?>'><br>
-                Temps passé: <input type='time' name='controle_temps_passe' value='<?php echo $controle['TempsPasse'] ?>'><br>
+                Temps passé: <input type='time' step='1' name='controle_temps_passe' value='<?php echo $controle['TempsPasse'] ?>'><br>
                 Commentaire : <input type='text' name='controle_commentaire' value='<?php echo $controle['Commentaire'] ?>'><br>
                 <button type='submit'>Modifier le contrôle de matériel</button>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
