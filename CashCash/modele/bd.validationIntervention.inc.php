@@ -3,7 +3,7 @@ include_once "bd.inc.php";
 
 VerificationConnexion();
 
-function getInformationForTable(){
+function getInformationForTable($matricule){
     try {
         $cnx = connexionPDO();
         $req = $cnx->prepare("SELECT 
@@ -19,9 +19,10 @@ function getInformationForTable(){
         JOIN 
             typemateriel ON materiel.ReferenceInterne = typemateriel.ReferenceInterne
         WHERE
-            intervention.Matricule IS NOT NULL
+            intervention.Matricule = :matricule
         ORDER BY 1 ASC;
         ");
+        $req->bindValue(":matricule", $matricule, PDO::PARAM_INT);
         $req->execute();
         $resultats = $req->fetchAll(PDO::FETCH_ASSOC);
         return $resultats;

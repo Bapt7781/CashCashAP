@@ -1,6 +1,7 @@
 <?php
 if (isset($_SESSION["role"])) {
     $role = $_SESSION["role"];
+    $matricule = getMatriculeULoggedOn();
 }
 
 if (isset($role) && !empty($role)) {
@@ -27,7 +28,7 @@ if (isset($role) && !empty($role)) {
     </thead>
     <tbody>
 <?php
-$information = getInformationForTable();
+$information = getInformationForTable($matricule);
 $interventionsDejaAffichees = array(); // Tableau pour stocker les numéros d'intervention déjà affichés
 
 foreach ($information as $uneLigne) {

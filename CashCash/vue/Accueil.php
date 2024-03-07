@@ -80,7 +80,7 @@ if (isset($_SESSION["role"])) {
                 <a href="./?action=ValiderIntervention" class="btn btn-primary">Redirection</a>
             </div>
             <div class="d-flex align-items-center justify-content-center" style="height: 100%;">
-                <img src="" class="card-img-bottom">
+                <img src="./images/ScreenValidationIntervention.png" class="card-img-bottom">
             </div>
         </div>
     </div>
