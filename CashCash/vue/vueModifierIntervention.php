@@ -94,7 +94,7 @@ if (isset($role) && !empty($role)) {
             <input type='hidden' name='action' value='ajouter'>
             <input type='hidden' name='numero_intervention' value='<?php echo $modification['NumeroIntervention']; ?>'>
             Numéro de série du matériel: <input type='number' name='nouveau_numero_serie'><br>
-            Temps passé: <input type='time' name='nouveau_temps_passe'><br>
+            Temps passé: <input type='time' step='1' name='nouveau_temps_passe'><br>
             Commentaire : <input type='text' name='nouveau_commentaire'><br>
             <button type='submit' onclick='window.location.reload();'>Ajouter le contrôle</button>
         </form>
