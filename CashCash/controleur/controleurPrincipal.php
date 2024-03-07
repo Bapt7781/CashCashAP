@@ -10,7 +10,8 @@ function controleurPrincipal($action) {
     $lesActions["ModifierIntervention"] = "ModifierIntervention.php";
     $lesActions["ValiderInformation"] = "ValiderInformation.php";
     $lesActions["RechercheFiche"] = "Fiche.php";
-    $lesActions["ValiderIntervention"] = "validationIntervention.php";    
+    $lesActions["ValiderIntervention"] = "validationIntervention.php"; 
+    $lesActions["ValiderInterventionSuccess"] = "validationInterventionSuccess.php"; 
     $lesActions["AffectationVisite"] = "AffectationVisite.php";
     
 

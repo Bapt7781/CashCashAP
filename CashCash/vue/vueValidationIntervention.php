@@ -63,7 +63,7 @@ foreach ($information as $uneLigne) {
                             foreach ($informationForModal as $uneLigne){
                                 echo "<h5>".$uneLigne['LibelleTypeMateriel']."</h5>";
                             ?>
-                            <form method="post" action="">
+                            <form method="post" action="./?action=ValiderInterventionSuccess">
                                 <div class="form-floating">
                                     <textarea class="form-control" placeholder="Commentaire" id="floatingTextarea2" name="commentaire" style="height: 100px" maxlength="150"></textarea>
                                     <label for="floatingTextarea2">Commentaire</label>
@@ -93,14 +93,6 @@ foreach ($information as $uneLigne) {
     }
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $commentaire = $_POST["commentaire"];
-    $tempsPasse = $_POST["tempsPasse"];
-    $numeroIntervention = $_POST["numeroIntervention"];
-    $numeroDeSerie = $_POST["numeroDeSerie"];
-
-    addInformationToBdd($numeroIntervention, $numeroDeSerie, $tempsPasse, $commentaire);
-}
 ?>
 
     </tbody>
