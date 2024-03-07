@@ -7,7 +7,7 @@ if (isset($role) && !empty($role)) {
         include "$racine/vue/entete.php";
 ?>
         <title>Modification interventions</title>
-        <link rel="stylesheet" href="./css/ModifierInt.css">
+        <link rel="stylesheet" href="./css/ModifierInter.css">
         <br><br><br>
         
         <form action='./?action=ValiderInformation' method='post' id="page">

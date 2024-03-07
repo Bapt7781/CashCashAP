@@ -4,4 +4,5 @@ if ($_SERVER["SCRIPT_FILENAME"] == __FILE__) {
 }
 include_once "$racine/modele/bd.validationIntervention.inc.php";
 
+
 include "$racine/vue/vueValidationIntervention.php";

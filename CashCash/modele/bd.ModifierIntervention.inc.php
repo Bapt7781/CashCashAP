@@ -1,5 +1,5 @@
 <?php
-
+include_once "bd.inc.php";
 VerificationConnexion();
 
 function ValiderInformationIntervention($donneesFormulaire) {
