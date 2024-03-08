@@ -15,9 +15,17 @@ function login($matriculeU, $mdpU) {
     $mdpBD = $utilisateur["MotDePasse"];
 
     // Vérification du mot de passe
-    if (trim($mdpBD) == trim($mdpU)) {
+// Vérification du mot de passe
+    if (password_verify($mdpU, $mdpBD)) {
         $_SESSION["matriculeU"] = $matriculeU;
-        $_SESSION["mdpU"] = $mdpBD;
+
+        // Récupération du rôle
+        $role = getRole($matriculeU);
+
+        // Stockage du rôle dans la session
+        if ($role == 'technicien' || $role == 'assistant') {
+            $_SESSION["role"] = $role;
+        }
     }
     else {
         echo '<script>';
