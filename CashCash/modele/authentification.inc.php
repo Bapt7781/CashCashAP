@@ -13,24 +13,24 @@ function login($matriculeU, $mdpU) {
     }
 
     $mdpBD = $utilisateur["MotDePasse"];
-
+    $mdpUHache = hash('sha256', $mdpU);
     // Vérification du mot de passe
-    if (password_verify($mdpU, $mdpBD)) {
+    if (trim($mdpBD) == trim($mdpUHache)) {
         $_SESSION["matriculeU"] = $matriculeU;
-
-        // Récupération du rôle
-        $role = getRole($matriculeU);
-
-        // Stockage du rôle dans la session
-        if ($role == 'technicien' || $role == 'assistant') {
-            $_SESSION["role"] = $role;
-        }
+        $_SESSION["mdpU"] = $mdpBD;
     }
     else {
         echo '<script>';
         echo 'alert("Échec de la connexion. Vérifiez si les données entrées sont correctes");';
         echo 'window.location.href="?action=connexion";';
         echo '</script>';
+    }
+    // Récupération du rôle
+    $role = getRole($matriculeU);
+
+    // Stockage du rôle dans la session
+    if ($role == 'technicien' || $role == 'assistant') {
+        $_SESSION["role"] = $role;
     }
 }
 
