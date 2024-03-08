@@ -19,6 +19,12 @@ function login($matriculeU, $mdpU) {
         $_SESSION["matriculeU"] = $matriculeU;
         $_SESSION["mdpU"] = $mdpBD;
     }
+    else {
+        echo '<script>';
+        echo 'alert("Échec de la connexion. Vérifiez si les données entrées sont correctes");';
+        echo 'window.location.href="?action=connexion";';
+        echo '</script>';
+    }
     // Récupération du rôle
     $role = getRole($matriculeU);
 
@@ -91,7 +97,7 @@ if ($_SERVER["SCRIPT_FILENAME"] == __FILE__) {
     // test de connexion
     login("test@bts.sio", "sio");
     if (isLoggedOn()) {
-        echo "logged";
+         "logged";
     } else {
         echo "not logged";
     }
