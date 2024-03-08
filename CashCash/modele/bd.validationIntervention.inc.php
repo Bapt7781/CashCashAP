@@ -20,7 +20,7 @@ function getInformationForTable($matricule){
             typemateriel ON materiel.ReferenceInterne = typemateriel.ReferenceInterne
         WHERE
             intervention.Matricule = :matricule
-        ORDER BY 1 ASC;
+        ORDER BY 2 ASC;
         ");
         $req->bindValue(":matricule", $matricule, PDO::PARAM_INT);
         $req->execute();
