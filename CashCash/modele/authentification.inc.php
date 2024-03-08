@@ -15,7 +15,6 @@ function login($matriculeU, $mdpU) {
     $mdpBD = $utilisateur["MotDePasse"];
 
     // Vérification du mot de passe
-// Vérification du mot de passe
     if (password_verify($mdpU, $mdpBD)) {
         $_SESSION["matriculeU"] = $matriculeU;
 
@@ -32,13 +31,6 @@ function login($matriculeU, $mdpU) {
         echo 'alert("Échec de la connexion. Vérifiez si les données entrées sont correctes");';
         echo 'window.location.href="?action=connexion";';
         echo '</script>';
-    }
-    // Récupération du rôle
-    $role = getRole($matriculeU);
-
-    // Stockage du rôle dans la session
-    if ($role == 'technicien' || $role == 'assistant') {
-        $_SESSION["role"] = $role;
     }
 }
 
