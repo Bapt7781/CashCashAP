@@ -164,8 +164,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <?php } else{
     include "$racine/controleur/connexion.php";
 }
-}else {
-    include "$racine/controleur/connexion.php";
-}
-
+}else 
 ?>

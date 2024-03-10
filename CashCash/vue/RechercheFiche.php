@@ -14,109 +14,158 @@ if (isset($role) && !empty($role)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rechercher une Fiche</title>
     <style>
+        /* CSS général */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             background-color: #f4f4f4;
             margin: 0;
             padding: 0;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            text-align:center;
-            
+            text-align: center;
         }
 
+        .recherchefiche {
+            max-width: 400px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        /* CSS spécifique au formulaire */
         .container {
             background-color: #fff;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             width: 435px;
+            margin: 20px auto;
         }
 
-        .input-group {
-            margin-bottom: 20px;
-        }
-
-        input {
-            width: calc(100% - 12px);
+        input,
+        button {
+            width: 100%;
             padding: 10px;
-            margin: 6px 0;
-            display: inline-block;
-            border: 1px solid #ccc;
+            margin-bottom: 10px;
             box-sizing: border-box;
-            border-radius: 4px;
         }
 
         button {
-            background-color:#007BFF;
-            color: white;
-            padding: 10px 174px;
+            background-color: #007BFF;
+            color: #fff;
             border: none;
             border-radius: 4px;
             cursor: pointer;
+            transition: background-color 0.3s ease;
         }
 
         button:hover {
-            background-color:#0056b3;
+            background-color: #0056b3;
         }
 
-        .client-list {
-            list-style-type: none;
-            padding: 0;
+        /* Résultat */
+        .resultat-item {
+            background-color: #fff;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
         }
 
-        .client-list-item {
-            margin-bottom: 10px;
+        .resultat-item p {
+            margin: 0;
+        }
+
+        .resultat-item table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        .resultat-item th,
+        .resultat-item td {
             border: 1px solid #ddd;
-            padding: 10px;
-            border-radius: 4px;
-            background-color:#C0C0C0;
+            padding: 8px;
+            text-align: left;
         }
-        label{
-            font-weight:bold;
+
+        .resultat-item th {
+            background-color: #D3D3D3;
+            color: black;
         }
-        .formulaire{
-            margin-top: 15%;
+
+        .resultat-item tr:nth-child(even) {
+            background-color: #F8F8FF;
         }
     </style>
 </head>
 <body>
-    <div class="container formulaire">
-        <div class="input-group flex-nowrap">
-        <form class="form" action="./?action=RechercheFiche" method="POST">
-                <label for="numero client" >Saisir un numéro client</label>
-                <input type="number" name="numero_client" class="form-control" placeholder="Ex: 18">
-                <button type="submit">Valider</button>
-                <?php
-                if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                    if (isset($_POST["numero_client"])) {
-                    $numero_client = $_POST['numero_client'];
+<div class="recherchefiche">
+    <h1>Rechercher une Fiche</h1>
+    <form class="form" action="./?action=RechercheFiche" method="POST">
+        <label for="numero_client">Saisir un numéro client</label>
+        <input type="text" name="numero_client" required oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="8" class="custom-input">
+        <button type="submit">Valider</button>
+    </form>
+</div>
 
-                    $Recherchefiche = getRecherchefiche($numero_client);
-                    }
-                
-                if (!empty($Recherchefiche)) {
-                    foreach ($Recherchefiche as $uneLigne) {
-                      //echo faire une liste deroulante et donc modifier requete pour avoir seulement le numero client dans la listes deroulante pour seulemetn apres avoir selectionner la fiche avoir toutes les informations de la liste de CE client
-                        
-                    }
-                }
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST["numero_client"])) {
+        $numero_client = $_POST['numero_client'];
+        $Recherchefiche = getRecherchefiche($numero_client);
+
+        if (!empty($Recherchefiche)) {
+            foreach ($Recherchefiche as $uneLigne) {
+                echo "<div class='resultat-item'>";
+                echo "<table>";
+                echo "<tr><th>Numéro client</th><th>Raison sociale</th><th>Siren</th><th>Code APE</th><th>Adresse</th><th>Téléphone client</th><th>Email</th><th>Durée de déplacement</th><th>Distance Km</th><th>Numéro agence</th><th>Numéro de contrat</th><th>Date signature</th><th>Date échéance</th><th>Ref type contrat</th><th>Numéro intervention</th><th>Date visite</th><th>Heure visite</th><th>Numéro de série</th><th>Date de vente</th><th>Date installation</th><th>Prix de vente</th><th>Emplacement</th><th>Référence interne</th></tr>";
+                echo "<tr>";
+                echo "<td>" . $uneLigne["NumeroClient"] . "</td>";
+                echo "<td>" . $uneLigne["RaisonSociale"] . "</td>";
+                echo "<td>" . $uneLigne["Siren"] . "</td>";
+                echo "<td>" . $uneLigne["CodeApe"] . "</td>";
+                echo "<td>" . $uneLigne["Adresse"] . "</td>";
+                echo "<td>" . $uneLigne["TelephoneClient"] . "</td>";
+                echo "<td>" . $uneLigne["Email"] . "</td>";
+                echo "<td>" . $uneLigne["DureeDeplacement"] . "</td>";
+                echo "<td>" . $uneLigne["DistanceKm"] . "</td>";
+                echo "<td>" . $uneLigne["NumeroAgence"] . "</td>";
+                echo "<td>" . $uneLigne["NumeroDeContrat"] . "</td>";
+                echo "<td>" . $uneLigne["DateSignature"] . "</td>";
+                echo "<td>" . $uneLigne["DateEcheance"] . "</td>";
+                echo "<td>" . $uneLigne["RefTypeContrat"] . "</td>";
+                echo "<td>" . $uneLigne["NumeroIntervention"] . "</td>";
+                echo "<td>" . $uneLigne["DateVisite"] . "</td>";
+                echo "<td>" . $uneLigne["HeureVisite"] . "</td>";
+                echo "<td>" . $uneLigne["NumeroDeSerie"] . "</td>";
+                echo "<td>" . $uneLigne["DateDeVente"] . "</td>";
+                echo "<td>" . $uneLigne["DateInstallation"] . "</td>";
+                echo "<td>" . $uneLigne["PrixDeVente"] . "</td>";
+                echo "<td>" . $uneLigne["Emplacement"] . "</td>";
+                echo "<td>" . $uneLigne["ReferenceInterne"] . "</td>";
+                echo "</tr>";
+                echo "</table>";
+                echo "</div>";
             }
-                ?>
-            </form>
-        </div>
+        } else {
+            echo "<div class='resultat-item'><p>Aucun résultat trouvé.</p></div>";
+        }
+    }
+}
+?>
 
-        <?php
-        ?>
-    </div>
 </body>
 </html>
-<?php } else{
-    include "$racine/controleur/connexion.php";
-}
-}else {
-    include "$racine/controleur/connexion.php";
-}
 
+<?php
+    } else {
+        include "$racine/controleur/connexion.php";
+    }
+}
 ?>
