@@ -153,6 +153,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST["numero_client"])) {
         $numero_client = $_POST['numero_client'];
         $Recherchefiche = getRecherchefiche($numero_client);
+        $getRecherchemateriel = getRecherchemateriel($numero_client);
 
         if (!empty($Recherchefiche)) {
             foreach ($Recherchefiche as $uneLigne) {
@@ -184,13 +185,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             echo "<div class='resultat-item'><p>Aucun résultat trouvé.</p></div>";
         }
-    }
-}
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (isset($_POST["numero_client"])) {
-        $numero_client = $_POST['numero_client'];
-        $getRecherchemateriel = getRecherchemateriel($numero_client);
-
         if (!empty($getRecherchemateriel)) {
             foreach ($getRecherchemateriel as $uneLigne) {
                 echo "<div class='resultat-item2'>";
@@ -208,10 +202,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo "</div>";
             }
         }
+        ?>
+        <form action="./?action=ModifierFiche" method="post">
+            <input type="hidden" name='numero_client' value='<?php echo $numero_client?>'>
+            <button type="submit" class="button">Modifier</button>
+        </form>
+<?php
     }
-}  
+}
+
 ?>
-<button type="button" class="button" onclick="window.location.href='./?action=ModifierFiche'">Modifier</button>
 
 
 </body>
