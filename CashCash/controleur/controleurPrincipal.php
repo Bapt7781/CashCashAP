@@ -13,6 +13,7 @@ function controleurPrincipal($action) {
     $lesActions["ValiderIntervention"] = "validationIntervention.php"; 
     $lesActions["ValiderInterventionSuccess"] = "validationInterventionSuccess.php"; 
     $lesActions["AffectationVisite"] = "AffectationVisite.php";
+    $lesActions["ModifierFiche"] = "ModifierFiche.php";
     
 
     if (array_key_exists($action, $lesActions)) {

@@ -68,7 +68,7 @@ if (isset($role) && !empty($role)) {
             background-color: #0056b3;
         }
 
-        /* Résultat */
+        /* Résultat1 */
         .resultat-item {
             background-color: #fff;
             padding: 15px;
@@ -86,12 +86,10 @@ if (isset($role) && !empty($role)) {
             border-collapse: collapse;
             margin-top: 15px;
         }
-
-        .resultat-item th,
         .resultat-item td {
             border: 1px solid #ddd;
             padding: 8px;
-            text-align: left;
+            text-align: center;
         }
 
         .resultat-item th {
@@ -100,6 +98,42 @@ if (isset($role) && !empty($role)) {
         }
 
         .resultat-item tr:nth-child(even) {
+            background-color: #F8F8FF;
+        }
+
+        /* Résultat2 */
+        .resultat-item2 {
+            background-color: #fff;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 600px
+        }
+
+        .resultat-item2 p {
+            margin: 0;
+        }
+
+        .resultat-item2 table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        .resultat-item2 td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .resultat-item2 th {
+            background-color: #D3D3D3;
+            color: black;
+        }
+
+        .resultat-item2 tr:nth-child(even) {
             background-color: #F8F8FF;
         }
     </style>
@@ -124,7 +158,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             foreach ($Recherchefiche as $uneLigne) {
                 echo "<div class='resultat-item'>";
                 echo "<table>";
-                echo "<tr><th>Numéro client</th><th>Raison sociale</th><th>Siren</th><th>Code APE</th><th>Adresse</th><th>Téléphone client</th><th>Email</th><th>Durée de déplacement</th><th>Distance Km</th><th>Numéro agence</th><th>Numéro de contrat</th><th>Date signature</th><th>Date échéance</th><th>Ref type contrat</th><th>Numéro intervention</th><th>Date visite</th><th>Heure visite</th><th>Numéro de série</th><th>Date de vente</th><th>Date installation</th><th>Prix de vente</th><th>Emplacement</th><th>Référence interne</th></tr>";
+                echo "<tr><th>Numéro client</th><th>Raison sociale</th><th>Siren</th><th>Code APE</th><th>Adresse</th><th>Téléphone client</th><th>Email</th><th>Durée de déplacement</th><th>Distance Km</th><th>Numéro agence</th><th>Numéro de contrat</th><th>Date signature</th><th>Date échéance</th><th>Ref type contrat</th><th>Numéro intervention</th><th>Date visite</th><th>Heure visite</th></tr>";
                 echo "<tr>";
                 echo "<td>" . $uneLigne["NumeroClient"] . "</td>";
                 echo "<td>" . $uneLigne["RaisonSociale"] . "</td>";
@@ -143,6 +177,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo "<td>" . $uneLigne["NumeroIntervention"] . "</td>";
                 echo "<td>" . $uneLigne["DateVisite"] . "</td>";
                 echo "<td>" . $uneLigne["HeureVisite"] . "</td>";
+                echo "</tr>";
+                echo "</table>";
+                echo "</div>";
+            }
+        } else {
+            echo "<div class='resultat-item'><p>Aucun résultat trouvé.</p></div>";
+        }
+    }
+}
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST["numero_client"])) {
+        $numero_client = $_POST['numero_client'];
+        $getRecherchemateriel = getRecherchemateriel($numero_client);
+
+        if (!empty($getRecherchemateriel)) {
+            foreach ($getRecherchemateriel as $uneLigne) {
+                echo "<div class='resultat-item2'>";
+                echo "<table>";
+                echo "<tr><th>Numéro de série</th><th>Date de vente</th><th>Date installation</th><th>Prix de vente</th><th>Emplacement</th><th>Référence interne</th></tr>";
+                echo "<tr>";
                 echo "<td>" . $uneLigne["NumeroDeSerie"] . "</td>";
                 echo "<td>" . $uneLigne["DateDeVente"] . "</td>";
                 echo "<td>" . $uneLigne["DateInstallation"] . "</td>";
@@ -153,12 +207,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo "</table>";
                 echo "</div>";
             }
-        } else {
-            echo "<div class='resultat-item'><p>Aucun résultat trouvé.</p></div>";
         }
     }
-}
+}  
 ?>
+<button type="button" class="button" onclick="window.location.href='./?action=ModifierFiche'">Modifier</button>
+
 
 </body>
 </html>
