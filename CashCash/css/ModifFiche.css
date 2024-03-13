@@ -9,6 +9,33 @@ form#page2 {
     border-radius: 5px;
 }
 
+form#page input[type='text'],
+form#page input[type='number'],
+form#page input[type='email'],
+form#page input[type='date'],
+form#page input[type='time'],
+form#page select {
+    width: calc(100% - 20px); /* Les champs de saisie occupent toute la largeur */
+    padding: 10px;
+    margin-bottom: 10px; /* Ajoutez un espacement entre les champs */
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+form#page2 input[type='text'],
+form#page2 input[type='number'],
+form#page2 input[type='email'],
+form#page2 input[type='date'],
+form#page2 input[type='time'],
+form#page2 select {
+    width: calc(100% - 20px); /* Les champs de saisie occupent toute la largeur */
+    padding: 10px;
+    margin-bottom: 10px; /* Ajoutez un espacement entre les champs */
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
 /* Style des titres */
 h3 {
     color: #333;
@@ -37,8 +64,7 @@ select {
 }
 
 /* Style du bouton de soumission */
-button[type="submit"],
-button.cancel-button {
+button[type="submit"]{
     background-color: #007BFF;
     color: #fff;
     padding: 10px 15px;
@@ -47,27 +73,10 @@ button.cancel-button {
     cursor: pointer;
 }
 
-button[type="submit"]:hover,
-button.cancel-button:hover {
+button[type="submit"]:hover{
     background-color: #0056b3;
 }
 
-.cancel-button {
-    background-color: red;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.cancel-button:hover {
-    background-color: darkred;
-}
-
-body {
-    background-color: #f4f4f4;
-}
 .cancel-button {
     background-color: #dc3545;
     color: white;
@@ -78,7 +87,7 @@ body {
 }
 
 .cancel-button:hover {
-    background-color: #b02a37;
+    background-color: darkred;
 }
 
 .supp-button {
@@ -92,4 +101,8 @@ body {
 
 .supp-button:hover {
     background-color: #b02a37;
+}
+
+body {
+    background-color: #f4f4f4;
 }
