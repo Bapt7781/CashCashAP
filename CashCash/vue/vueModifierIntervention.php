@@ -21,35 +21,7 @@ if (isset($role) && !empty($role)) {
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button type='button' class='cancel-button' onclick='window.location.reload();'>Annuler</button>
         </form><br><br><br><br>
-
-        <style>
-            .cancel-button {
-                background-color: #dc3545;
-                color: white;
-                padding: 10px 15px;
-                border: none;
-                border-radius: 4px;
-                cursor: pointer;
-            }
-
-            .cancel-button:hover {
-                background-color: #b02a37;
-            }
-
-            .supp-button {
-                background-color: #dc3545;
-                color: white;
-                padding: 10px 15px;
-                border: none;
-                border-radius: 4px;
-                cursor: pointer;
-            }
-
-            .supp-button:hover {
-                background-color: #b02a37;
-            }
-        </style>
-
+        
         <?php
         foreach ($InformationMateriel as $controle) {
         ?>

@@ -1,8 +1,11 @@
 <?php
+// Inclut le fichier de connexion à la base de données
 include_once "bd.inc.php";
 
+// Vérifie la connexion à la base de données
 VerificationConnexion();
 
+// Fonction pour obtenir les informations à afficher dans la table des interventions pour un matricule donné
 function getInformationForTable($matricule){
     try {
         $cnx = connexionPDO();
@@ -27,11 +30,13 @@ function getInformationForTable($matricule){
         $resultats = $req->fetchAll(PDO::FETCH_ASSOC);
         return $resultats;
     } catch (Exception $e) {
+        // En cas d'erreur, affiche l'erreur et arrête le script
         print "Erreur !: " . $e->getMessage();
         die();
     }
 }
 
+// Fonction pour obtenir les informations à afficher dans le modal de validation pour un numéro d'intervention donné
 function getInformationForModal($numeroIntervention){
     try {
         $cnx = connexionPDO();
@@ -60,30 +65,34 @@ function getInformationForModal($numeroIntervention){
         $resultats = $req->fetchAll(PDO::FETCH_ASSOC);
         return $resultats;
     }catch (Exception $e) {
+        // En cas d'erreur, affiche l'erreur et arrête le script
         print "Erreur !: " . $e->getMessage();
         die();
     }
 }
 
+// Fonction pour ajouter des informations à la base de données pour une intervention validée
 function addInformationToBdd($numeroIntervention, $NumeroDeSerie, $tempsPasse, $commentaire){
     try {
         $cnx = connexionPDO();
 
-        // Remplacez les noms de colonnes et de table selon votre structure de base de données
+        // Prépare la requête d'insertion dans la table controler
         $req = $cnx->prepare("INSERT INTO controler (NumeroDeSerie, NumeroIntervention, TempsPasse, Commentaire) 
                                 VALUES (:numeroDeSerie, :numeroIntervention, :tempsPasse, :commentaire)");
 
-        // Liaison des paramètres avec les valeurs
+        // Lie les paramètres aux valeurs
         $req->bindParam(':numeroIntervention', $numeroIntervention, PDO::PARAM_INT);
         $req->bindParam(':numeroDeSerie', $NumeroDeSerie, PDO::PARAM_INT);
         $req->bindParam(':commentaire', $commentaire, PDO::PARAM_STR);
         $req->bindParam(':tempsPasse', $tempsPasse, PDO::PARAM_STR);
 
+        // Exécute la requête
         $result = $req->execute();
 
+        // Affiche un message d'alerte selon le résultat de l'ajout
         echo '<script>';
         if ($result) {
-            echo 'alert("ajout réussie !");';
+            echo 'alert("Ajout réussi !");';
             echo 'window.location.href="?action=ValiderInterventionSuccess";';
         } else {
             echo `alert("Échec de l'ajout.");`;
@@ -92,7 +101,7 @@ function addInformationToBdd($numeroIntervention, $NumeroDeSerie, $tempsPasse, $
         echo '</script>';
 
     } catch (PDOException $e) {
+        // En cas d'erreur PDO, affiche l'erreur
         echo "Erreur : " . $e->getMessage();
     }
 }
-    
