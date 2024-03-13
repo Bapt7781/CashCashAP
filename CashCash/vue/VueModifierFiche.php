@@ -10,26 +10,26 @@ if (isset($role) && !empty($role)) {
         <link rel="stylesheet" href="./css/ModifierFiche.css">
         <br><br><br>
         
-        <form action='./?action=ValiderInformationFiche' method='post' id="page">
+        <form action='./?action=ModifierFiche' method='post' id="page">
             <h3>Modifier les informations de la fiche :</h3>
             <input type='hidden' name='action' value='modifierInfoClient'>
             <input type='hidden' name='numero_client' value='<?php echo $modificationclient['NumeroClient']; ?>'>
             Raison sociale: <input type='text' name='raison_sociale' value='<?php echo $modificationclient['RaisonSociale']; ?>'> <br>
-            Siren: <input type='text' name='siren' value='<?php echo $modificationclient['Siren']; ?>'> <br>
-            Code APE: <input type='text' name='code_ape' value='<?php echo $modificationclient['CodeApe']; ?>'> <br>
+            Siren: <input type='number' name='siren' value='<?php echo $modificationclient['Siren']; ?>'> <br>
+            Code APE: <input type='number' name='code_ape' value='<?php echo $modificationclient['CodeApe']; ?>'> <br>
             Adresse: <input type='text' name='adresse' value='<?php echo $modificationclient['Adresse']; ?>'> <br>
             Téléphone client: <input type='text' name='telephone_client' value='<?php echo $modificationclient['TelephoneClient']; ?>'><br>
             Email: <input type='email' name='email' value='<?php echo $modificationclient['Email']; ?>'><br>
-            Durée de déplacement: <input type='text' name='duree_deplacement' value='<?php echo $modificationclient['DureeDeplacement']; ?>'><br>
-            Distance Km: <input type='text' name='distance_km' value='<?php echo $modificationclient['DistanceKm']; ?>'><br>
-            Numéro agence: <input type='text' name='numero_agence' value='<?php echo $modificationclient['NumeroAgence']; ?>'><br>
-            Numéro de contrat: <input type='text' name='numero_contrat' value='<?php echo $modificationclient['NumeroDeContrat']; ?>'><br>
+            Durée de déplacement: <input type='number' step="0.01" name='duree_deplacement' value='<?php echo $modificationclient['DureeDeplacement']; ?>'><br>
+            Distance Km: <input type='number' step="0.01" name='distance_km' value='<?php echo $modificationclient['DistanceKm']; ?>'><br>
+            Numéro agence: <input type='number' name='numero_agence' value='<?php echo $modificationclient['NumeroAgence']; ?>'><br>
+            Numéro de contrat: <input type='number' name='numero_contrat' value='<?php echo $modificationclient['NumeroDeContrat']; ?>'><br>
             Date signature: <input type='date' name='date_signature' value='<?php echo $modificationclient['DateSignature']; ?>'><br>
             Date échéance: <input type='date' name='date_echeance' value='<?php echo $modificationclient['DateEcheance']; ?>'><br>
-            Ref type contrat: <input type='text' name='ref_type_contrat' value='<?php echo $modificationclient['RefTypeContrat']; ?>'><br>
-            Numéro intervention: <input type='text' name='Numéro_intervention' value='<?php echo $modificationclient['NumeroIntervention']; ?>'><br>
-            Date visite: <input type='text' name='Date_visite' value='<?php echo $modificationclient['DateVisite']; ?>'><br>
-            Heure visite: <input type='text' name='Heure_visite' value='<?php echo $modificationclient['HeureVisite']; ?>'><br>
+            Ref type contrat: <input type='number' name='ref_type_contrat' value='<?php echo $modificationclient['RefTypeContrat']; ?>'><br>
+            Numéro intervention: <input type='number' name='Numéro_intervention' value='<?php echo $modificationclient['NumeroIntervention']; ?>'><br>
+            Date visite: <input type='date' name='Date_visite' value='<?php echo $modificationclient['DateVisite']; ?>'><br>
+            Heure visite: <input type='time' step='1' name='Heure_visite' value='<?php echo $modificationclient['HeureVisite']; ?>'><br>
             <button type='submit'>Valider les modifications</button>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button type='button' class='cancel-button' onclick='window.location.reload();'>Annuler</button>
@@ -38,7 +38,8 @@ if (isset($role) && !empty($role)) {
         <?php
         foreach($modificationMateriel as $unMateriel){
         ?>
-        <form action='./?action=ValiderInformationFiche' method='post' >
+        <form action='./?action=ModifierFiche' method='post' id="page2">
+            <h3>Modifier les matériaux du client :</h3>
             <input type='hidden' name='action' value='modifierInfoClientMat'>
             <input type='hidden' name='numero_client' value='<?php echo $modificationclient['NumeroClient']; ?>'>
             Date de vente: <input type='text' name='Date_de_vente' value='<?php echo $unMateriel['DateDeVente']; ?>'><br>
@@ -48,11 +49,28 @@ if (isset($role) && !empty($role)) {
             Reference Interne: <input type='text' name='Emplacement' value='<?php echo $unMateriel['ReferenceInterne']; ?>'><br>
             <button type='submit'>Valider les modifications</button>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <button type='button' class='cancel-button' onclick='window.location.reload();'>Annuler</button>
+            <button type='button' class='supp-button' onclick="deleteControle()">Supprimer</button>
+            <input type='hidden' name='supprimer' value='true'>
         </form><br><br>
+            <script>
+                function deleteControle() {
+                    if (confirm("Voulez-vous vraiment supprimer ce matériel ?")) {
+                        // Ajouter un input supplémentaire pour indiquer la suppression
+                        var form = document.getElementById('page2');
+                        var input = document.createElement('input');
+                        input.type = 'hidden';
+                        input.name = 'action';
+                        input.value = 'Supp';
+                        form.appendChild(input);
+
+                        // Soumettre le formulaire
+                        form.submit();
+                    }
+                }
+            </script>
         <?php } ?>
 
-        <form action='./?action=ValiderInformation' method='post' id="page">
+        <form action='./?action=ModifierFiche' method='post' id="page">
             <h3>Nouveau Matériel pour le client :</h3>
             <input type='hidden' name='action' value='ajouterMateriel'>
             <input type='hidden' name='numero_client' value='<?php echo $modificationclient['NumeroClient']; ?>'>
@@ -60,7 +78,13 @@ if (isset($role) && !empty($role)) {
             Date installation: <input type='text' name='Date_installation' value='<?php echo $unMateriel['DateInstallation']; ?>'><br>
             Prix de vente: <input type='text' name='Prix_de_vente' value='<?php echo $unMateriel['PrixDeVente']; ?>'><br>
             Emplacement: <input type='text' name='Emplacement' value='<?php echo $unMateriel['Emplacement']; ?>'><br>
-            <select name="ReferenceInterne"></select>
+            <select name="ReferenceInterne">
+            <?php
+                foreach ($materiel as $unMateriel) {
+                    echo "<option value='{$unMateriel['ReferenceInterne']}'>{$unMateriel['LibelleTypeMateriel']}</option>";
+                }
+            ?>
+            </select>
             <button type='submit' onclick='window.location.reload();'>Ajouter le contrôle</button>
         </form>
 

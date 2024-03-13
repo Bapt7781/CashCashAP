@@ -70,7 +70,7 @@ if (isset($role) && !empty($role)) {
 
             <script>
                 function deleteControle() {
-                    if (confirm("Voulez-vous vraiment supprimer ce contrôle ?")) {
+                    if (confirm("Voulez-vous vraiment supprimer ce matériel ?")) {
                         // Ajouter un input supplémentaire pour indiquer la suppression
                         var form = document.getElementById('page2');
                         var input = document.createElement('input');

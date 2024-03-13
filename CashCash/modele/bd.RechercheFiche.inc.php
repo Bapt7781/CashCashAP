@@ -66,4 +66,26 @@ function getRechercheficheInfo($numero_client) {
         }
 }
 
+
+    function getMateriel(){
+        try{
+            $cnx = connexionPDO();
+            $req = $cnx->prepare("SELECT ReferenceInterne,LibelleTypeMateriel
+            FROM `typemateriel`");
+    
+            $req->execute();
+            $resultats = $req->fetchAll(PDO::FETCH_ASSOC);
+            return $resultats;
+        }
+        catch (Exception $e) {
+            print "Erreur !: " . $e->getMessage();
+            die();
+        }
+    }
+
+
+
+
+    
+
 ?>
