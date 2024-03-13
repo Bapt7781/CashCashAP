@@ -1,13 +1,17 @@
 <?php
+// Inclusion du fichier de connexion à la base de données
 include_once "bd.inc.php";
+
+// Vérification de la connexion à la base de données
 VerificationConnexion();
 
+// Fonction pour valider les informations d'une intervention modifiée
 function ValiderInformationIntervention($donneesFormulaire) {
     try {
-        //Connexion BDD
+        // Connexion à la base de données
         $cnx = connexionPDO();
         
-        // Vérifiez si les données soumises sont présentes et correctes
+        // Vérification de l'existence des données nécessaires
         if (!isset($donneesFormulaire['numero_intervention'])) {
             throw new Exception("Données invalides : numéro d'intervention manquant.");
         }
@@ -15,8 +19,7 @@ function ValiderInformationIntervention($donneesFormulaire) {
             throw new Exception("Numéro client invalide : le numéro client n'existe pas.");
         }
 
-
-        // Mise à jour de la date de visite, de l'heure et du numéro du client
+        // Mise à jour de la date de visite, de l'heure et du numéro client de l'intervention
         $req = $cnx->prepare("UPDATE intervention SET DateVisite = :NewDateI, HeureVisite = :NewHeure, NumeroClient = :NewNumeroClient WHERE NumeroIntervention = :NumIntervention;");
         $req->bindValue(':NewDateI', $donneesFormulaire['date_visite'], PDO::PARAM_STR);
         $req->bindValue(':NewHeure', $donneesFormulaire['heure_visite'], PDO::PARAM_STR);
@@ -47,6 +50,7 @@ function ValiderInformationIntervention($donneesFormulaire) {
     }
 }
 
+// Fonction pour vérifier si un numéro de client existe dans la base de données
 function numeroClientExiste($cnx, $numeroClient) {
     $req = $cnx->prepare("SELECT COUNT(*) FROM client WHERE NumeroClient = :NumeroClient;");
     $req->bindValue(':NumeroClient', $numeroClient, PDO::PARAM_INT);
@@ -55,19 +59,17 @@ function numeroClientExiste($cnx, $numeroClient) {
     return ($count > 0);
 }
 
-
-function numeroClientCorrespondMateriel($cnx, $numeroClient,$numeroSerie) {
+// Fonction pour vérifier si un numéro de série correspond à un client donné
+function numeroClientCorrespondMateriel($cnx, $numeroClient, $numeroSerie) {
     $req = $cnx->prepare("SELECT COUNT(*) FROM materiel WHERE NumeroDeSerie = :NumeroSerie AND NumeroClient = :NumeroClient");
     $req->bindValue(':NumeroClient', $numeroClient,PDO::PARAM_INT);
     $req->bindValue(':NumeroSerie', $numeroSerie,PDO::PARAM_INT);
     $req->execute();
     $count = $req->fetchColumn();
-    $drapeau = false;
-    if($count > 0 ){
-        $drapeau = true;
-    }
-    return $drapeau;
+    return ($count > 0);
 }
+
+// Fonction pour récupérer le numéro de client associé à une intervention
 function DonneNumeroClient($cnx, $NumeroIntervention) {
     $req = $cnx->prepare("SELECT NumeroClient FROM intervention WHERE NumeroIntervention = :NumeroIntervention");
     $req->bindValue(':NumeroIntervention', $NumeroIntervention, PDO::PARAM_INT);
@@ -82,13 +84,13 @@ function DonneNumeroClient($cnx, $NumeroIntervention) {
     }
 }
 
-
+// Fonction pour ajouter un contrôle d'intervention
 function ajouteControleIntervention($donneesFormulaire) {
     try {
-        //Connexion BDD
+        // Connexion à la base de données
         $cnx = connexionPDO();
         
-        // Vérifiez si les données soumises sont présentes et correctes
+        // Vérification de l'existence des données nécessaires
         if (!isset($donneesFormulaire['NumeroIntervention'])) {
             throw new Exception("Données invalides : numéro d'intervention manquant.");
         }
@@ -97,6 +99,7 @@ function ajouteControleIntervention($donneesFormulaire) {
             throw new Exception("Numéro Serie invalide : le numéro de série n'appartient pas au client saisi.");
         }
 
+        // Insertion du contrôle d'intervention
         $req = $cnx->prepare("INSERT INTO controler(NumeroDeSerie,NumeroIntervention,TempsPasse,Commentaire) VALUES(:NewNumeroDeSerie, :NumeroIntervention, :NewTempsPasse, :Commentaire)");
         $req->bindValue(':NewNumeroDeSerie', $donneesFormulaire['NumeroDeSerie'], PDO::PARAM_INT);
         $req->bindValue(':NumeroIntervention', $donneesFormulaire['NumeroIntervention'], PDO::PARAM_INT);
@@ -127,13 +130,13 @@ function ajouteControleIntervention($donneesFormulaire) {
     }
 }
 
-
+// Fonction pour modifier un contrôle d'intervention
 function ModificationControleIntervention($donneesFormulaire){
     try{
-        //Connexion BDD
+        // Connexion à la base de données
         $cnx = connexionPDO();
     
-        // Vérifiez si les données soumises sont présentes et correctes
+        // Vérification de l'existence des données nécessaires
         if (!isset($donneesFormulaire['NumeroIntervention'])) {
             throw new Exception("Données invalides : numéro d'intervention manquant.");
         }
@@ -142,7 +145,7 @@ function ModificationControleIntervention($donneesFormulaire){
             throw new Exception("Numéro Serie invalide : le numéro de série n'appartient pas au client saisi.");
         }
 
-
+        // Mise à jour du contrôle d'intervention
         $req = $cnx->prepare("UPDATE controler SET 
                                 NumeroDeSerie = :NouveauNumSerie, 
                                 Commentaire = :Commentaire, 
@@ -153,7 +156,6 @@ function ModificationControleIntervention($donneesFormulaire){
         $req->bindValue(':TempsPasse', $donneesFormulaire['TempsPasse'], PDO::PARAM_STR);
         $req->bindValue(':AncienNumSerie', $donneesFormulaire['AncienNumSerie'], PDO::PARAM_INT);
         $req->bindValue(':NumeroIntervention', $donneesFormulaire['NumeroIntervention'], PDO::PARAM_INT);
-
 
         $result = $req->execute();
 
@@ -168,9 +170,9 @@ function ModificationControleIntervention($donneesFormulaire){
         }
         echo '</script>';
 
-    }catch(PDOException $e){
+    } catch(PDOException $e){
         throw new Exception("Erreur lors de l'exécution de la requête SQL : " . $e->getMessage());
-    }catch(Exception $e){
+    } catch(Exception $e){
         // Notification JavaScript pour les erreurs
         echo '<script>';
         echo 'alert("' . $e->getMessage() . '");';
@@ -179,12 +181,13 @@ function ModificationControleIntervention($donneesFormulaire){
     }
 }
 
+// Fonction pour supprimer un contrôle d'intervention
 function SuppressionControleIntervention($donneesFormulaire) {
     try {
         // Connexion à la base de données
         $cnx = connexionPDO();
 
-        // Vérifiez si les données soumises sont présentes et correctes
+        // Vérification de l'existence des données nécessaires
         if (!isset($donneesFormulaire['NumeroIntervention'])) {
             throw new Exception("Données invalides : numéro d'intervention manquant.");
         }

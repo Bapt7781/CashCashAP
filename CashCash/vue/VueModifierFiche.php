@@ -1,19 +1,26 @@
 <?php
+// Vérifie si la session contient le rôle de l'utilisateur
 if (isset($_SESSION["role"])) {
     $role = $_SESSION["role"];
 }
+// Vérifie si le rôle est défini et non vide
 if (isset($role) && !empty($role)) {
+    // Vérifie si le rôle est assistant
     if ($role == "assistant") {
+        // Inclut l'entête de la vue
         include "$racine/vue/entete.php";
 ?>
+        <!-- Titre de la page -->
         <title>Modification des informations de la fiche</title>
         <link rel="stylesheet" href="./css/ModifFiche.css">
         <br><br><br>
         
         <form action='./?action=ModifierFiche' method='post' id="page">
             <h3>Modifier les informations de la fiche :</h3>
+            <!-- Champs cachés pour les informations -->
             <input type='hidden' name='action' value='modifierInfoClient'>
             <input type='hidden' name='numero_client' value='<?php echo $modificationclient['NumeroClient']; ?>'>
+            <!-- Champs de saisie pour les informations de la fiche -->
             Raison sociale: <input type='text' name='raison_sociale' value='<?php echo $modificationclient['RaisonSociale']; ?>'> <br>
             Siren: <input type='number' name='siren' value='<?php echo $modificationclient['Siren']; ?>'> <br>
             Code APE: <input type='number' name='code_ape' value='<?php echo $modificationclient['CodeApe']; ?>'> <br>
@@ -35,6 +42,7 @@ if (isset($role) && !empty($role)) {
             <button type='button' class='cancel-button' onclick='window.location.reload();'>Annuler</button>
         </form><br><br>
 
+        <!-- Boucle pour afficher les informations de chaque matériel -->
         <?php
         foreach($modificationMateriel as $unMateriel){
         ?>
@@ -90,9 +98,11 @@ if (isset($role) && !empty($role)) {
 
 <?php
     } else {
+        // Inclut le contrôleur de connexion pour les autres rôles
         include "$racine/controleur/connexion.php";
     }
 } else {
+    // Inclut le contrôleur de connexion si le rôle n'est pas défini
     include "$racine/controleur/connexion.php";
 }
 ?>
