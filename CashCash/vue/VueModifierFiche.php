@@ -7,7 +7,7 @@ if (isset($role) && !empty($role)) {
         include "$racine/vue/entete.php";
 ?>
         <title>Modification des informations de la fiche</title>
-        <link rel="stylesheet" href="./css/ModifierFiche.css">
+        <link rel="stylesheet" href="./css/ModifFiche.css">
         <br><br><br>
         
         <form action='./?action=ModifierFiche' method='post' id="page">
@@ -42,11 +42,10 @@ if (isset($role) && !empty($role)) {
             <h3>Modifier les matériaux du client :</h3>
             <input type='hidden' name='action' value='modifierInfoClientMat'>
             <input type='hidden' name='numero_client' value='<?php echo $modificationclient['NumeroClient']; ?>'>
-            Date de vente: <input type='text' name='Date_de_vente' value='<?php echo $unMateriel['DateDeVente']; ?>'><br>
-            Date installation: <input type='text' name='Date_installation' value='<?php echo $unMateriel['DateInstallation']; ?>'><br>
-            Prix de vente: <input type='text' name='Prix_de_vente' value='<?php echo $unMateriel['PrixDeVente']; ?>'><br>
+            Date de vente: <input type='date' name='Date_de_vente' value='<?php echo $unMateriel['DateDeVente']; ?>'><br>
+            Date installation: <input type='date' name='Date_installation' value='<?php echo $unMateriel['DateInstallation']; ?>'><br>
+            Prix de vente: <input type='number' step="0.01" name='Prix_de_vente' value='<?php echo $unMateriel['PrixDeVente']; ?>'><br>
             Emplacement: <input type='text' name='Emplacement' value='<?php echo $unMateriel['Emplacement']; ?>'><br>
-            Reference Interne: <input type='text' name='Emplacement' value='<?php echo $unMateriel['ReferenceInterne']; ?>'><br>
             <button type='submit'>Valider les modifications</button>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button type='button' class='supp-button' onclick="deleteControle()">Supprimer</button>
@@ -73,11 +72,11 @@ if (isset($role) && !empty($role)) {
         <form action='./?action=ModifierFiche' method='post' id="page">
             <h3>Nouveau Matériel pour le client :</h3>
             <input type='hidden' name='action' value='ajouterMateriel'>
-            <input type='hidden' name='numero_client' value='<?php echo $modificationclient['NumeroClient']; ?>'>
-            Date de vente: <input type='text' name='Date_de_vente' value='<?php echo $unMateriel['DateDeVente']; ?>'><br>
-            Date installation: <input type='text' name='Date_installation' value='<?php echo $unMateriel['DateInstallation']; ?>'><br>
-            Prix de vente: <input type='text' name='Prix_de_vente' value='<?php echo $unMateriel['PrixDeVente']; ?>'><br>
-            Emplacement: <input type='text' name='Emplacement' value='<?php echo $unMateriel['Emplacement']; ?>'><br>
+            <input type='hidden' name='numero_client' value='<?php $modificationclient['NumeroClient']; ?>'>
+            Date de vente: <input type='date' name='Date_de_vente' value=''><br>
+            Date installation: <input type='date' name='Date_installation' value=''><br>
+            Prix de vente: <input type='number' step="0.01" name='Prix_de_vente' value=''><br>
+            Emplacement: <input type='text' name='Emplacement' value=''><br>
             <select name="ReferenceInterne">
             <?php
                 foreach ($materiel as $unMateriel) {
@@ -88,33 +87,6 @@ if (isset($role) && !empty($role)) {
             <button type='submit' onclick='window.location.reload();'>Ajouter le contrôle</button>
         </form>
 
-        <style>
-           .cancel-button {
-                background-color: #dc3545;
-                color: white;
-                padding: 10px 15px;
-                border: none;
-                border-radius: 4px;
-                cursor: pointer;
-            }
-
-            .cancel-button:hover {
-                background-color: #b02a37;
-            }
-
-            .supp-button {
-                background-color: #dc3545;
-                color: white;
-                padding: 10px 15px;
-                border: none;
-                border-radius: 4px;
-                cursor: pointer;
-            }
-
-            .supp-button:hover {
-                background-color: #b02a37;
-            }
-        </style>
 
 <?php
     } else {
