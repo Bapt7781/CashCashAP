@@ -107,13 +107,13 @@ function getRecherchemateriel($numero_client) {
             $req = $cnx->prepare("UPDATE client SET RaisonSociale = :RaisonSociale, Siren = :Siren, CodeApe = :CodeApe, Adresse = :Adresse,TelephoneClient = :TelephoneClient, Email = :Email, DureeDeplacement = :DureeDeplacement, DistanceKm = :DistanceKm,NumeroAgence = :NumeroAgence WHERE numeroClient = :NumClient")
             $req->bindValue(':NumClient', $donneesFormulaire['numeroClient'], PDO::PARAM_INT);
             $req->bindValue(':RaisonSociale', $donneesFormulaire['RaisonSociale'], PDO::PARAM_STR);
-            $req->bindValue(':Siren', $donneesFormulaire['Siren'], PDO::PARAM_STR);
+            $req->bindValue(':Siren', $donneesFormulaire['Siren'], PDO::PARAM_INT);
             $req->bindValue(':CodeApe', $donneesFormulaire['CodeApe'], PDO::PARAM_INT);
-            $req->bindValue(':Adresse', $donneesFormulaire['Adresse'], PDO::PARAM_INT);
+            $req->bindValue(':Adresse', $donneesFormulaire['Adresse'], PDO::PARAM_STR);
             $req->bindValue(':TelephoneClient', $donneesFormulaire['TelephoneClient'], PDO::PARAM_STR);
-            $req->bindValue(':Email', $donneesFormulaire['Email'], PDO::PARAM_INT);
-            $req->bindValue(':DureeDeplacement', $donneesFormulaire['DureeDeplacement'], PDO::PARAM_INT);
-            $req->bindValue(':DistanceKm', $donneesFormulaire['DistanceKm'], PDO::PARAM_INT);
+            $req->bindValue(':Email', $donneesFormulaire['Email'], PDO::PARAM_STR);
+            $req->bindValue(':DureeDeplacement', $donneesFormulaire['DureeDeplacement'], PDO::PARAM_STR);
+            $req->bindValue(':DistanceKm', $donneesFormulaire['DistanceKm'], PDO::PARAM_STR);
             $req->bindValue(':NumeroAgence', $donneesFormulaire['NumeroAgence'], PDO::PARAM_INT);
 
             $result = $req->execute();
