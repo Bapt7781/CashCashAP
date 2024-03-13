@@ -1,15 +1,21 @@
 <?php
+// Vérifie si la session contient le rôle de l'utilisateur
 if (isset($_SESSION["role"])) {
     $role = $_SESSION["role"];
 }
+
+// Vérifie si le rôle est défini et non vide
 if (isset($role) && !empty($role)) {
-    if ($role == "assistant") { // Affichage ci-dessous si le rôle est assistant
+    // Affichage ci-dessous si le rôle est assistant
+    if ($role == "assistant") {
+        // Inclut l'entête de la vue
         include "$racine/vue/entete.php";
 ?>
         <title>Modification interventions</title>
         <link rel="stylesheet" href="./css/ModifierInter.css">
         <br><br><br>
         
+        <!-- Formulaire pour modifier l'heure, la date de visite et les informations du client -->
         <form action='./?action=ValiderInformation' method='post' id="page">
             <h3>Modifier l'heure, la date de visite et les informations du client :</h3>
             <input type='hidden' name='action' value='modifier'>
@@ -22,9 +28,11 @@ if (isset($role) && !empty($role)) {
             <button type='button' class='cancel-button' onclick='window.location.reload();'>Annuler</button>
         </form><br><br><br><br>
         
+        <!-- Boucle pour afficher les informations du matériel à contrôler -->
         <?php
         foreach ($InformationMateriel as $controle) {
         ?>
+            <!-- Formulaire pour modifier le contrôle du matériel -->
             <form action='./?action=ValiderInformation' method='post' id="page2">
                 <h3>Contrôle de Matériel :</h3>
                 <input type='hidden' name='action' value='MaterielModif'>
@@ -36,14 +44,16 @@ if (isset($role) && !empty($role)) {
                 <button type='submit'>Modifier le contrôle de matériel</button>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
+                <!-- Bouton pour supprimer le contrôle du matériel -->
                 <button type='button' class='supp-button' onclick="deleteControle()">Supprimer</button>
                 <input type='hidden' name='supprimer' value='true'>
             </form>
 
+            <!-- Script pour confirmer la suppression du contrôle du matériel -->
             <script>
                 function deleteControle() {
                     if (confirm("Voulez-vous vraiment supprimer ce contrôle ?")) {
-                        // Ajouter un input supplémentaire pour indiquer la suppression
+                        // Ajoute un input supplémentaire pour indiquer la suppression
                         var form = document.getElementById('page2');
                         var input = document.createElement('input');
                         input.type = 'hidden';
@@ -51,7 +61,7 @@ if (isset($role) && !empty($role)) {
                         input.value = 'Supp';
                         form.appendChild(input);
 
-                        // Soumettre le formulaire
+                        // Soumet le formulaire
                         form.submit();
                     }
                 }
@@ -60,6 +70,7 @@ if (isset($role) && !empty($role)) {
             <br>
         <?php } ?>
 
+        <!-- Formulaire pour ajouter un nouveau contrôle de matériel -->
         <br><br><br><br>
         <form action='./?action=ValiderInformation' method='post' id="page">
             <h3>Nouveau Contrôle de Matériel :</h3>
@@ -73,9 +84,11 @@ if (isset($role) && !empty($role)) {
 
 <?php
     } else {
+        // Inclut le contrôleur de connexion pour les autres rôles
         include "$racine/controleur/connexion.php";
     }
 } else {
+    // Inclut le contrôleur de connexion si le rôle n'est pas défini
     include "$racine/controleur/connexion.php";
 }
 ?>
