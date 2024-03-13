@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $email = $_POST['email'];
             $duree_deplacement = $_POST['duree_deplacement'];
             $distance_km = $_POST['distance_km'];
-            $numero_agence = $_POST['numero_agence'];
+            $numero_agence = $_POST['numero_agence']; ------
             $numero_contrat = $_POST['numero_contrat'];
             $date_signature = $_POST['date_signature'];
             $date_echeance = $_POST['date_echeance'];
@@ -33,6 +33,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $Numéro_intervention = $_POST['Numéro_intervention'];
             $Date_visite = $_POST['Date_visite'];
             $Heure_visite = $_POST['Heure_visite'];
+
+
 
 
 
