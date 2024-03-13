@@ -34,7 +34,7 @@ if (isset($role) && !empty($role)) {
             Date signature: <input type='date' name='date_signature' value='<?php echo $modificationclient['DateSignature']; ?>'><br>
             Date échéance: <input type='date' name='date_echeance' value='<?php echo $modificationclient['DateEcheance']; ?>'><br>
             Ref type contrat: <input type='number' name='ref_type_contrat' value='<?php echo $modificationclient['RefTypeContrat']; ?>'><br>
-            Numéro intervention: <input type='number' name='Numéro_intervention' readonly="readonly" value='<?php echo $modificationclient['NumeroIntervention']; ?>'><br>
+            Numéro intervention: <input type='number' name='numero_intervention' readonly="readonly" value='<?php echo $modificationclient['NumeroIntervention']; ?>'><br>
             Date visite: <input type='date' name='Date_visite' value='<?php echo $modificationclient['DateVisite']; ?>'><br>
             Heure visite: <input type='time' step='1' name='Heure_visite' value='<?php echo $modificationclient['HeureVisite']; ?>'><br>
             <button type='submit'>Valider les modifications</button>
@@ -49,7 +49,8 @@ if (isset($role) && !empty($role)) {
         <form action='./?action=ModifierFiche' method='post' id="page2">
             <h3>Modifier les matériaux du client :</h3>
             <input type='hidden' name='action' value='modifierInfoClientMat'>
-            <input type='hidden' name='numero_client' value='<?php echo $modificationclient['NumeroClient']; ?>'>
+            <input type='number' name='numero_serie' readonly="readonly" value='<?php echo $unMateriel['NumeroDeSerie']; ?>'>
+            <input type='hidden' name='numero_client' value='<?php echo $unMateriel['NumeroClient']; ?>'>
             Date de vente: <input type='date' name='Date_de_vente' value='<?php echo $unMateriel['DateDeVente']; ?>'><br>
             Date installation: <input type='date' name='Date_installation' value='<?php echo $unMateriel['DateInstallation']; ?>'><br>
             Prix de vente: <input type='number' step="0.01" name='Prix_de_vente' value='<?php echo $unMateriel['PrixDeVente']; ?>'><br>

@@ -104,8 +104,8 @@ function getRecherchemateriel($numero_client) {
         try{
 
             $cnx = connexionPDO();
-            $req = $cnx->prepare("UPDATE client SET RaisonSociale = :RaisonSociale, Siren = :Siren, CodeApe = :CodeApe, Adresse = :Adresse,TelephoneClient = :TelephoneClient, Email = :Email, DureeDeplacement = :DureeDeplacement, DistanceKm = :DistanceKm,NumeroAgence = :NumeroAgence WHERE NumeroClient = :NumClient");
-            $req->bindValue(':NumClient', $donneesFormulaire['numeroClient'], PDO::PARAM_INT);
+            $req = $cnx->prepare("UPDATE client SET RaisonSociale = :RaisonSociale, Siren = :Siren, CodeApe = :CodeApe, Adresse = :Adresse, TelephoneClient = :TelephoneClient, Email = :Email, DureeDeplacement = :DureeDeplacement, DistanceKm = :DistanceKm,NumeroAgence = :NumeroAgence WHERE NumeroClient = :numeroClient");
+            $req->bindValue(':numeroClient', $donneesFormulaire['numeroClient'], PDO::PARAM_INT);
             $req->bindValue(':RaisonSociale', $donneesFormulaire['RaisonSociale'], PDO::PARAM_STR);
             $req->bindValue(':Siren', $donneesFormulaire['Siren'], PDO::PARAM_INT);
             $req->bindValue(':CodeApe', $donneesFormulaire['CodeApe'], PDO::PARAM_INT);
@@ -118,47 +118,87 @@ function getRecherchemateriel($numero_client) {
 
             $result = $req->execute();
             if ($result) {
-                $req2 = $cnx->prepare("UPDATE contratdemaintenance SET DateSignature = :DateSignature, DateEcheance = :DateEcheance, RefTypeContrat = :RefTypeContrat WHERE NumeroClient = :NumClient AND NumeroDeContrat = :NumContrat");
+                $req2 = $cnx->prepare("UPDATE contratdemaintenance SET DateSignature = :DateSignature, DateEcheance = :DateEcheance, RefTypeContrat = :RefTypeContrat WHERE NumeroClient = :numeroClient AND NumeroDeContrat = :NumContrat");
                 $req2->bindValue(':DateSignature', $donneesFormulaire['DateSignature'], PDO::PARAM_STR);
                 $req2->bindValue(':DateEcheance', $donneesFormulaire['DateEcheance'], PDO::PARAM_STR);
-                $req2->bindValue(':NumClient', $donneesFormulaire['numeroClient'], PDO::PARAM_INT);
+                $req2->bindValue(':numeroClient', $donneesFormulaire['numeroClient'], PDO::PARAM_INT);
                 $req2->bindValue(':NumContrat', $donneesFormulaire['NumContrat'], PDO::PARAM_INT);
                 $req2->bindValue(':RefTypeContrat', $donneesFormulaire['RefTypeContrat'], PDO::PARAM_INT);
             
                 $result2 = $req2->execute();
 
                 if($result2){
-                    $req3 = $cnx->prepare("UPDATE intervention SET DateVisite = :DateSignature, HeureVisite = :HeureVisite WHERE NumeroIntervention = :NumIntervention");
+                    $req3 = $cnx->prepare("UPDATE intervention SET DateVisite = :DateVisite, HeureVisite = :HeureVisite WHERE NumeroIntervention = :NumIntervention");
                     $req3->bindValue(':DateVisite', $donneesFormulaire['DateVisite'], PDO::PARAM_STR);
                     $req3->bindValue(':HeureVisite', $donneesFormulaire['HeureVisite'], PDO::PARAM_STR);
                     $req3->bindValue(':NumIntervention', $donneesFormulaire['NumIntervention'], PDO::PARAM_INT);
 
                     $result3 = $req3->execute();
 
+                    echo '<script>';
                     if($result3){
                         echo 'alert("Fiche Client modifié avec succès ! Redirection vers la recherche...");';
-                        echo 'window.location.href="?action=RechercherFiche";';
+                        echo 'window.location.href="?action=RechercheFiche";';
                     }else{
                         echo 'alert("Échec de la modification de la fiche client. Veuillez réessayer.");';
-                        echo 'window.location.href="?action=RechercherFiche";';
+                        echo 'window.location.href="?action=RechercheFiche";';
                     }
+                    
                 }else{
                     echo 'alert("Échec de la modification de la fiche client. Veuillez réessayer.");';
-                    echo 'window.location.href="?action=RechercherFiche";';
+                    echo 'window.location.href="?action=RechercheFiche";';
                 }
             }else{
                 echo 'alert("Échec de la modification de la fiche client. Veuillez réessayer.");';
-                echo 'window.location.href="?action=RechercherFiche";';
+                echo 'window.location.href="?action=RechercheFiche";';
             }
+            echo '</script>';
         }catch (PDOException $e) {
             throw new Exception("Erreur lors de l'exécution de la requête SQL : " . $e->getMessage());
         } catch (Exception $e) {
             // Notification JavaScript pour les erreurs
             echo '<script>';
             echo 'alert("' . $e->getMessage() . '");';
-            echo 'window.location.href="?action=RechercherIntervention";';
+            echo 'window.location.href="?action=RechercherFiche";';
             echo '</script>';
         }
     }
+
+    function getModifInfoClientMat($donneesFormulaire){
+        try {
+            $cnx = connexionPDO(); // Connexion à la base de données
+            // Requête SQL pour sélectionner les informations sur le matériel associé à un client
+            $req = $cnx->prepare("UPDATE materiel SET DateDeVente = :DateDeVente, DateInstallation = :DateInstallation, PrixDeVente = :PrixDeVente,Emplacement = :Emplacement WHERE NumeroClient = :numero_client AND NumeroDeSerie = :NumeroDeSerie;");
+    
+            $req->bindParam(":numero_client", $numero_client, PDO::PARAM_INT); // Liaison du paramètre
+            $req->bindParam(":NumeroDeSerie", $numero_serie, PDO::PARAM_INT);// Liaison du paramètre
+            $req->bindParam(":DateDeVente", $Date_de_vente, PDO::PARAM_STR);// Liaison du paramètre
+            $req->bindParam(":DateInstallation", $Date_installation, PDO::PARAM_STR);// Liaison du paramètre
+            $req->bindParam(":Emplacement", $Emplacement, PDO::PARAM_STR);// Liaison du paramètre
+            $req->bindParam(":PrixDeVente", $Prix_de_vente, PDO::PARAM_STR);// Liaison du paramètre
+            
+
+            
+            $result = $req->execute(); // Exécution de la requête 
+            echo '<script>';
+            if($result){
+                echo 'alert("Fiche Client modifié avec succès ! Redirection vers la recherche...");';
+                echo 'window.location.href="?action=RechercheFiche";';
+            }else{
+                echo 'alert("Échec de la modification de la fiche client. Veuillez réessayer.");';
+                echo 'window.location.href="?action=RechercheFiche";';
+            }
+            echo '</script>';
+        }catch (PDOException $e) {
+            throw new Exception("Erreur lors de l'exécution de la requête SQL : " . $e->getMessage());
+        } catch (Exception $e) {
+            // Notification JavaScript pour les erreurs
+            echo '<script>';
+            echo 'alert("' . $e->getMessage() . '");';
+            echo 'window.location.href="?action=RechercheFiche";';
+            echo '</script>';
+        }
+    }
+
 
 ?>

@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $date_signature = $_POST['date_signature'];
             $date_echeance = $_POST['date_echeance'];
             $ref_type_contrat = $_POST['ref_type_contrat'];
-            $Numéro_intervention = $_POST['Numéro_intervention'];
+            $Numero_intervention = $_POST['numero_intervention'];
             $Date_visite = $_POST['Date_visite'];
             $Heure_visite = $_POST['Heure_visite'];
 
@@ -51,12 +51,29 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 'RefTypeContrat' => $ref_type_contrat,
                 'DateVisite' => $Date_visite,
                 'HeureVisite' => $Heure_visite,
-                'NumIntervention' => $Numéro_intervention,
+                'NumIntervention' => $Numero_intervention
             ]);
 
 
 
         }elseif($action === 'modifierInfoClientMat'){
+            $numero_serie = $_POST['numero_serie'];
+            $numero_client = $_POST['numero_client'];
+            $Date_de_vente = $_POST['Date_de_vente'];
+            $Date_installation = $_POST['Date_installation'];
+            $Prix_de_vente = $_POST['Prix_de_vente'];
+            $Emplacement = $_POST['Emplacement'];
+
+            getModifInfoClientMat([
+                'numero_serie'=> $numero_serie,
+                'numero_client'=> $numero_client ,
+                'Date_de_vente'=> $Date_de_vente ,
+                'Date_installation'=> $Date_installation ,
+                'Prix_de_vente'=> $Prix_de_vente ,
+                'Emplacement'=> $Emplacement
+            ]);
+
+
 
         }elseif ($action === 'Supp') {
 
