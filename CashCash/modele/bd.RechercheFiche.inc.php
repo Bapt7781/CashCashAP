@@ -84,8 +84,4 @@ function getRechercheficheInfo($numero_client) {
     }
 
 
-
-
-    
-
 ?>
