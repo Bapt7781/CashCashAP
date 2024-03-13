@@ -30,11 +30,11 @@ if (isset($role) && !empty($role)) {
             Durée de déplacement: <input type='number' step="0.01" name='duree_deplacement' value='<?php echo $modificationclient['DureeDeplacement']; ?>'><br>
             Distance Km: <input type='number' step="0.01" name='distance_km' value='<?php echo $modificationclient['DistanceKm']; ?>'><br>
             Numéro agence: <input type='number' name='numero_agence' value='<?php echo $modificationclient['NumeroAgence']; ?>'><br>
-            Numéro de contrat: <input type='number' name='numero_contrat' value='<?php echo $modificationclient['NumeroDeContrat']; ?>'><br>
+            Numéro de contrat: <input type='number' name='numero_contrat' readonly="readonly" value='<?php echo $modificationclient['NumeroDeContrat']; ?>'><br>
             Date signature: <input type='date' name='date_signature' value='<?php echo $modificationclient['DateSignature']; ?>'><br>
             Date échéance: <input type='date' name='date_echeance' value='<?php echo $modificationclient['DateEcheance']; ?>'><br>
             Ref type contrat: <input type='number' name='ref_type_contrat' value='<?php echo $modificationclient['RefTypeContrat']; ?>'><br>
-            Numéro intervention: <input type='number' name='Numéro_intervention' value='<?php echo $modificationclient['NumeroIntervention']; ?>'><br>
+            Numéro intervention: <input type='number' name='Numéro_intervention' readonly="readonly" value='<?php echo $modificationclient['NumeroIntervention']; ?>'><br>
             Date visite: <input type='date' name='Date_visite' value='<?php echo $modificationclient['DateVisite']; ?>'><br>
             Heure visite: <input type='time' step='1' name='Heure_visite' value='<?php echo $modificationclient['HeureVisite']; ?>'><br>
             <button type='submit'>Valider les modifications</button>
