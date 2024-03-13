@@ -6,7 +6,7 @@ if ($_SERVER["SCRIPT_FILENAME"] == __FILE__) {
 include_once "$racine/modele/bd.RechercheFiche.inc.php";
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $idnumeroclient = $_POST["numero_client"];
-    $modificationclient = getRecherchefiche($idnumeroclient);
+    $modificationclient = getRechercheficheInfo($idnumeroclient);
     $modificationMateriel = getRecherchemateriel($idnumeroclient);
 }
 
