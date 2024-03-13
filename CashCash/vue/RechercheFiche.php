@@ -108,7 +108,7 @@ if (isset($role) && !empty($role)) {
             <!-- Formulaire pour modifier la fiche client -->
             <form action="./?action=ModifierFiche" method="post">
                 <input type="hidden" name='numero_client' value='<?php echo $numero_client?>'>
-                <button type="submit" class="button">Modifier</button>
+                <button type="submit" class="button1">Modifier</button>
             </form>
     <?php
         }
