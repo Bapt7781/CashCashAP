@@ -66,7 +66,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             getModifInfoClientMat([
                 'numero_serie'=> $numero_serie,
-                'numero_client'=> $numero_client ,
                 'Date_de_vente'=> $Date_de_vente ,
                 'Date_installation'=> $Date_installation ,
                 'Prix_de_vente'=> $Prix_de_vente ,
@@ -76,7 +75,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 
         }elseif ($action === 'Supp') {
-
+            $NumSerie = $_POST['numero_serie']; // Utiliser le bon nom de champ caché
+            echo $NumSerie;
+            SuppressionControleIntervention([
+                'NumSerie' => $NumSerie,
+            ]);
         }elseif($action === 'ajouterMateriel') {
 
         }

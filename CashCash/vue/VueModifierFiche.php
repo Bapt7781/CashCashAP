@@ -59,7 +59,6 @@ if (isset($role) && !empty($role)) {
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button type='button' class='supp-button' onclick="deleteControle()">Supprimer</button>
             <input type='hidden' name='supprimer' value='true'>
-        </form><br><br>
             <script>
                 function deleteControle() {
                     if (confirm("Voulez-vous vraiment supprimer ce matériel ?")) {
@@ -76,6 +75,8 @@ if (isset($role) && !empty($role)) {
                     }
                 }
             </script>
+        </form><br><br>
+            
         <?php } ?>
 
         <form action='./?action=ModifierFiche' method='post' id="page">

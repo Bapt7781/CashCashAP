@@ -168,16 +168,15 @@ function getRecherchemateriel($numero_client) {
         try {
             $cnx = connexionPDO(); // Connexion à la base de données
             // Requête SQL pour sélectionner les informations sur le matériel associé à un client
-            $req = $cnx->prepare("UPDATE materiel SET DateDeVente = :DateDeVente, DateInstallation = :DateInstallation, PrixDeVente = :PrixDeVente,Emplacement = :Emplacement WHERE NumeroClient = :numero_client AND NumeroDeSerie = :NumeroDeSerie;");
+            $req = $cnx->prepare("UPDATE materiel SET DateDeVente = :DateDeVente, DateInstallation = :DateInstallation, PrixDeVente = :PrixDeVente,Emplacement = :Emplacement WHERE NumeroDeSerie = :NumeroDeSerie");
     
-            $req->bindParam(":numero_client", $numero_client, PDO::PARAM_INT); // Liaison du paramètre
-            $req->bindParam(":NumeroDeSerie", $numero_serie, PDO::PARAM_INT);// Liaison du paramètre
-            $req->bindParam(":DateDeVente", $Date_de_vente, PDO::PARAM_STR);// Liaison du paramètre
-            $req->bindParam(":DateInstallation", $Date_installation, PDO::PARAM_STR);// Liaison du paramètre
-            $req->bindParam(":Emplacement", $Emplacement, PDO::PARAM_STR);// Liaison du paramètre
-            $req->bindParam(":PrixDeVente", $Prix_de_vente, PDO::PARAM_STR);// Liaison du paramètre
+            $req->bindParam(":NumeroDeSerie", $donneesFormulaire['numero_serie'], PDO::PARAM_INT);// Liaison du paramètre
+            $req->bindParam(":DateDeVente", $donneesFormulaire['Date_de_vente'], PDO::PARAM_STR);// Liaison du paramètre
+            $req->bindParam(":DateInstallation", $donneesFormulaire['Date_installation'], PDO::PARAM_STR);// Liaison du paramètre
+            $req->bindParam(":Emplacement", $donneesFormulaire['Emplacement'], PDO::PARAM_STR);// Liaison du paramètre
+            $req->bindParam(":PrixDeVente", $donneesFormulaire['Prix_de_vente'], PDO::PARAM_STR);// Liaison du paramètre
             
-
+            
             
             $result = $req->execute(); // Exécution de la requête 
             echo '<script>';
@@ -200,5 +199,38 @@ function getRecherchemateriel($numero_client) {
         }
     }
 
+    
+    function SuppressionControleIntervention($donneesFormulaire) {
+        try {
+            // Connexion à la base de données
+            $cnx = connexionPDO();
+    
+            // Suppression du contrôle d'intervention
+            $req = $cnx->prepare("DELETE FROM materiel,controler WHERE NumeroDeSerie = :NumeroDeSerie");
+            $req->bindValue(':NumeroDeSerie', $donneesFormulaire['NumSerie'], PDO::PARAM_INT);
+    
+            $result = $req->execute();
+    
+            // Notification JavaScript personnalisée
+            echo '<script>';
+            if ($result) {
+                echo 'alert("Contrôle supprimé avec succès ! Redirection vers la recherche...");';
+                echo 'window.location.href="?action=RechercheFiche";';
+            } else {
+                echo 'alert("Échec de la suppression du contrôle. Veuillez réessayer.");';
+                echo 'window.location.href="?action=RechercheFiche";';
+            }
+            echo '</script>';
+    
+        } catch (PDOException $e) {
+            throw new Exception("Erreur lors de l'exécution de la requête SQL : " . $e->getMessage());
+        } catch (Exception $e) {
+            // Notification JavaScript pour les erreurs
+            echo '<script>';
+            echo 'alert("' . $e->getMessage() . '");';
+            echo 'window.location.href="?action=RechercheFiche";';
+            echo '</script>';
+        }
+    }
 
 ?>
