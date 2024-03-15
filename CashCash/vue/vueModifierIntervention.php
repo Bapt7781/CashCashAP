@@ -45,13 +45,13 @@ if (isset($role) && !empty($role)) {
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
                 <!-- Bouton pour supprimer le contrôle du matériel -->
-                <button type='button' class='supp-button' onclick="deleteControle()">Supprimer</button>
+                <button type='button' class='supp-button' onclick="deleteControle('<?php echo $controle['NumeroDeSerie']; ?>')">Supprimer</button>
                 <input type='hidden' name='supprimer' value='true'>
-            </form>
+            
 
             <!-- Script pour confirmer la suppression du contrôle du matériel -->
             <script>
-                function deleteControle() {
+                function deleteControle(NumeroSerie) {
                     if (confirm("Voulez-vous vraiment supprimer ce matériel ?")) {
                         // Ajouter un input supplémentaire pour indiquer la suppression
                         var form = document.getElementById('page2');
@@ -60,14 +60,18 @@ if (isset($role) && !empty($role)) {
                         input.name = 'action';
                         input.value = 'Supp';
                         form.appendChild(input);
-
+                        var input2 = document.createElement('input');
+                        input2.type = 'number';
+                        input2.name = 'numero_serie';
+                        input2.value = NumeroSerie;
+                        form.appendChild(input2);
                         // Soumet le formulaire
                         form.submit();
                     }
                 }
             </script>
 
-            <br>
+        </form><br>
         <?php } ?>
 
         <!-- Formulaire pour ajouter un nouveau contrôle de matériel -->

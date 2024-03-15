@@ -94,6 +94,23 @@ function getRecherchemateriel($numero_client) {
             die();
         }
     }
+    function getContratClient($NumClient){
+        try{
+            $cnx = connexionPDO();
+            $req = $cnx->prepare("SELECT NumeroDeContrat
+            FROM `contratdemaintenance` WHERE NumeroClient = :NumClient");
+            
+            $req->bindValue(':NumClient', $NumClient, PDO::PARAM_INT);
+
+            $resultats = $req->execute();
+
+            return $resultats;
+        }
+        catch (Exception $e) {
+            print "Erreur !: " . $e->getMessage();
+            die();
+        }
+    }
 
 
 
@@ -206,18 +223,66 @@ function getRecherchemateriel($numero_client) {
             $cnx = connexionPDO();
     
             // Suppression du contrôle d'intervention
-            $req = $cnx->prepare("DELETE FROM materiel,controler WHERE NumeroDeSerie = :NumeroDeSerie");
+            $req = $cnx->prepare("DELETE FROM controler WHERE NumeroDeSerie = :NumeroDeSerie");
             $req->bindValue(':NumeroDeSerie', $donneesFormulaire['NumSerie'], PDO::PARAM_INT);
+            $result = $req->execute();
+            if($result){
+                $req2 = $cnx->prepare("DELETE FROM materiel WHERE NumeroDeSerie = :NumeroDeSerie");
+                $req2->bindValue(':NumeroDeSerie', $donneesFormulaire['NumSerie'], PDO::PARAM_INT);
+    
+                $result2 = $req2->execute();
+                echo '<script>';
+                if ($result2) {
+                    echo 'alert("Contrôle supprimé avec succès ! Redirection vers la recherche...");';
+                    echo 'window.location.href="?action=RechercheFiche";';
+                } else {
+                    echo 'alert("Échec de la suppression du contrôle. Veuillez réessayer.");';
+                    echo 'window.location.href="?action=RechercheFiche";';
+                }
+            }
+            // Notification JavaScript personnalisée
+            else {
+                echo 'alert("Échec de la suppression du contrôle. Veuillez réessayer.");';
+                echo 'window.location.href="?action=RechercheFiche";';
+            }
+            echo '</script>';
+    
+        } catch (PDOException $e) {
+            throw new Exception("Erreur lors de l'exécution de la requête SQL : " . $e->getMessage());
+        } catch (Exception $e) {
+            // Notification JavaScript pour les erreurs
+            echo '<script>';
+            echo 'alert("' . $e->getMessage() . '");';
+            echo 'window.location.href="?action=RechercheFiche";';
+            echo '</script>';
+        }
+    }
+
+
+    function ajouteMaterielClient($donneesFormulaire) {
+        try {
+            // Connexion à la base de données
+            $cnx = connexionPDO();
+
+            $req = $cnx->prepare("INSERT INTO `materiel` (`NumeroDeSerie`, `DateDeVente`, `DateInstallation`, `PrixDeVente`, `Emplacement`, `NumeroClient`, `NumeroDeContrat`, `ReferenceInterne`) VALUES (NULL, :DateDeVente, :DateInstallation, :PrixDeVente, :Emplacement, :NumeroClient, :NumeroDeContrat, :ReferenceInterne);");
+            $req->bindValue(':DateDeVente', $donneesFormulaire['DateDeVente'], PDO::PARAM_STR);
+            $req->bindValue(':DateInstallation', $donneesFormulaire['DateInstallation'], PDO::PARAM_STR);
+            $req->bindValue(':PrixDeVente', $donneesFormulaire['PrixDeVente'], PDO::PARAM_STR);
+            $req->bindValue(':Emplacement', $donneesFormulaire['Emplacement'], PDO::PARAM_STR);
+            $req->bindValue(':NumeroClient', $donneesFormulaire['NumeroClient'], PDO::PARAM_INT);
+            $req->bindValue(':NumeroDeContrat', $donneesFormulaire['NumeroDeContrat'], PDO::PARAM_INT);
+            $req->bindValue(':ReferenceInterne', $donneesFormulaire['ReferenceInterne'], PDO::PARAM_INT);
+
     
             $result = $req->execute();
     
             // Notification JavaScript personnalisée
             echo '<script>';
             if ($result) {
-                echo 'alert("Contrôle supprimé avec succès ! Redirection vers la recherche...");';
+                echo 'alert("Materiel ajouté avec succès ! Redirection vers la recherche...");';
                 echo 'window.location.href="?action=RechercheFiche";';
             } else {
-                echo 'alert("Échec de la suppression du contrôle. Veuillez réessayer.");';
+                echo 'alert("Échec de l\'ajout du Materiel. Veuillez réessayer.");';
                 echo 'window.location.href="?action=RechercheFiche";';
             }
             echo '</script>';

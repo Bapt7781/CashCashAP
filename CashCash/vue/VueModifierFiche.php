@@ -49,7 +49,7 @@ if (isset($role) && !empty($role)) {
         <form action='./?action=ModifierFiche' method='post' id="page2">
             <h3>Modifier les matériaux du client :</h3>
             <input type='hidden' name='action' value='modifierInfoClientMat'>
-            <input type='number' name='numero_serie' readonly="readonly" value='<?php echo $unMateriel['NumeroDeSerie']; ?>'>
+            Numéro de série: <input type='number' name='numero_serie_m' readonly="readonly" value='<?php echo $unMateriel['NumeroDeSerie']; ?>'>
             <input type='hidden' name='numero_client' value='<?php echo $unMateriel['NumeroClient']; ?>'>
             Date de vente: <input type='date' name='Date_de_vente' value='<?php echo $unMateriel['DateDeVente']; ?>'><br>
             Date installation: <input type='date' name='Date_installation' value='<?php echo $unMateriel['DateInstallation']; ?>'><br>
@@ -57,10 +57,10 @@ if (isset($role) && !empty($role)) {
             Emplacement: <input type='text' name='Emplacement' value='<?php echo $unMateriel['Emplacement']; ?>'><br>
             <button type='submit'>Valider les modifications</button>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <button type='button' class='supp-button' onclick="deleteControle()">Supprimer</button>
+            <button type='button' class='supp-button' onclick="deleteControle('<?php echo $unMateriel['NumeroDeSerie']; ?>')">Supprimer</button>
             <input type='hidden' name='supprimer' value='true'>
             <script>
-                function deleteControle() {
+                function deleteControle(NumeroSerie) {
                     if (confirm("Voulez-vous vraiment supprimer ce matériel ?")) {
                         // Ajouter un input supplémentaire pour indiquer la suppression
                         var form = document.getElementById('page2');
@@ -69,7 +69,11 @@ if (isset($role) && !empty($role)) {
                         input.name = 'action';
                         input.value = 'Supp';
                         form.appendChild(input);
-
+                        var input2 = document.createElement('input');
+                        input2.type = 'number';
+                        input2.name = 'numero_serie';
+                        input2.value = NumeroSerie;
+                        form.appendChild(input2);
                         // Soumettre le formulaire
                         form.submit();
                     }
@@ -82,7 +86,7 @@ if (isset($role) && !empty($role)) {
         <form action='./?action=ModifierFiche' method='post' id="page">
             <h3>Nouveau Matériel pour le client :</h3>
             <input type='hidden' name='action' value='ajouterMateriel'>
-            <input type='hidden' name='numero_client' value='<?php $modificationclient['NumeroClient']; ?>'>
+            <input type='hidden' name='numero_client' value='<?php echo $modificationclient['NumeroClient']; ?>'>
             Date de vente: <input type='date' name='Date_de_vente' value=''><br>
             Date installation: <input type='date' name='Date_installation' value=''><br>
             Prix de vente: <input type='number' step="0.01" name='Prix_de_vente' value=''><br>
@@ -94,6 +98,7 @@ if (isset($role) && !empty($role)) {
                 }
             ?>
             </select>
+            <input type='hidden' name='NumeroDeContrat' value='<?php echo $contrat; ?>'>
             <button type='submit' onclick='window.location.reload();'>Ajouter le contrôle</button>
         </form>
 

@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $modificationclient = getRechercheficheInfo($idnumeroclient);
     $modificationMateriel = getRecherchemateriel($idnumeroclient);
     $materiel = getMateriel();
-
+    $contrat = getContratClient($idnumeroclient);
 
 
     if(isset($_POST['action'])) {
@@ -76,12 +76,29 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         }elseif ($action === 'Supp') {
             $NumSerie = $_POST['numero_serie']; // Utiliser le bon nom de champ caché
-            echo $NumSerie;
+
             SuppressionControleIntervention([
                 'NumSerie' => $NumSerie,
             ]);
         }elseif($action === 'ajouterMateriel') {
 
+            $numero_client = $_POST['numero_client'];
+            $Date_de_vente = $_POST['Date_de_vente'];
+            $Date_installation = $_POST['Date_installation'];
+            $Prix_de_vente = $_POST['Prix_de_vente'];
+            $Emplacement = $_POST['Emplacement'];
+            $ReferenceInterne = $_POST['ReferenceInterne'];
+            $NumeroDeContrat = $_POST['NumeroDeContrat'];
+
+            ajouteMaterielClient([
+                'NumeroClient'=> $numero_client,
+                'DateDeVente'=> $Date_de_vente ,
+                'DateInstallation'=> $Date_installation ,
+                'PrixDeVente'=> $Prix_de_vente ,
+                'Emplacement'=> $Emplacement,
+                'ReferenceInterne'=> $ReferenceInterne,
+                'NumeroDeContrat' => $NumeroDeContrat
+            ]);
         }
     }
 }

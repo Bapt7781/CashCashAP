@@ -42,8 +42,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }elseif ($action === 'Supp') {
             
             $NumeroIntervention = $_POST['numero_intervention'];
-            $NumSerie = $_POST['controle_numero_serieAc']; // Utiliser le bon nom de champ caché
-            
+            $NumSerie = $_POST['numero_serie']; // Utiliser le bon nom de champ caché
+            echo $NumSerie;
         
             SuppressionControleIntervention([
                 'NumeroIntervention' => $NumeroIntervention,
