@@ -63,8 +63,8 @@ select {
     border-radius: 4px;
 }
 
-/* Style du bouton de soumission */
-button[type="submit"]{
+
+button{
     background-color: #007BFF;
     color: #fff;
     padding: 10px 15px;
@@ -73,7 +73,7 @@ button[type="submit"]{
     cursor: pointer;
 }
 
-button[type="submit"]:hover{
+button:hover{
     background-color: #0056b3;
 }
 

@@ -53,14 +53,14 @@
         }
 
         input,
-        .button2 {
+        .button1 {
             width: 20%;
             padding: 10px;
             margin-bottom: 10px;
             box-sizing: border-box;
         }
 
-        .button2 {
+        .button1 {
             background-color: #007BFF;
             color: #fff;
             border: none;
@@ -69,7 +69,7 @@
             transition: background-color 0.3s ease;
         }
 
-        .button2 {
+        .button1 {
             width: 300px;
         }
 
